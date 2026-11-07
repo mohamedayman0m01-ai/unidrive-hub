@@ -25,7 +25,9 @@ const signupBtn = document.getElementById('signup-btn');
 const ADMIN_EMAIL = "modi572008@gmail.com";
 
 if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // يمنع تحديث الصفحة
+        
         const email = loginEmailInput.value.trim();
         const password = loginPasswordInput.value.trim();
 
@@ -36,7 +38,6 @@ if (loginBtn) {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // التحقق الإجباري الحاسم للأدمن
                 const isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
                 const userRole = isAdmin ? 'admin' : 'student';
 
@@ -53,17 +54,13 @@ if (loginBtn) {
                     tasksDone: []
                 };
                 
-                // دالة قوية لإجبار النظام على فتح أزرار الأدمن وتخطي شاشة الطلاب
                 if (isAdmin || userRole === 'admin' || email.toLowerCase() === "modi572008@gmail.com") {
-                    // إخفاء شاشة التسجيل بالقوة
                     const authView = document.getElementById('auth-view');
                     if(authView) authView.style.display = 'none';
                     
-                    // إظهار شاشة المنصة/الأدمن بالقوة
                     const appView = document.getElementById('app-view');
                     if(appView) appView.style.display = 'block';
 
-                    // إظهار عناصر الأدمن لو كانت مخفية
                     document.querySelectorAll('.admin-only, [data-admin]').forEach(el => el.style.display = 'block');
 
                     alert("أهلاً بك يا باشمهندس محمد (الأدمن) في لوحة التحكم! 🚀");
@@ -77,6 +74,56 @@ if (loginBtn) {
             })
             .catch((error) => {
                 alert("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+            });
+    });
+}
+
+if (signupBtn) {
+    signupBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // يمنع تحديث الصفحة
+        
+        const email = signupEmailInput.value.trim();
+        const password = signupPasswordInput.value.trim();
+        const name = signupNameInput ? signupNameInput.value.trim() : "طالب جديد";
+
+        if(!email || !password) {
+            alert("يرجى إدخال البريد وكلمة المرور");
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                let role = 'student';
+                if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    role = 'admin';
+                }
+
+                const newSt = { 
+                    id: email, 
+                    name: name, 
+                    pass: password, 
+                    role: role, 
+                    xp: 50, 
+                    studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] 
+                };
+                
+                // هنا تفترض وجود مصفوفة ودوال من ملفات أخرى مثل enterPlatform
+                // قم بتعريفها أو التأكد من استدعائها بشكل صحيح
+                if(typeof studentsList !== 'undefined') {
+                    const idx = studentsList.findIndex(s => String(s.id).toLowerCase() === email.toLowerCase());
+                    if (idx >= 0) studentsList[idx] = newSt;
+                    else studentsList.push(newSt);
+                }
+                if(typeof saveData === 'function') saveData();
+                
+                currentUser = newSt;
+                
+                if(typeof enterPlatform === 'function') {
+                    enterPlatform('🎉 تم إنشاء الحساب بنجاح!');
+                }
+            })
+            .catch((error) => {
+                alert("حدث خطأ أثناء إنشاء الحساب: " + error.message);
             });
     });
 }
