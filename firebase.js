@@ -21,8 +21,11 @@ const loginBtn = document.getElementById('login-btn');
 
 const signupEmailInput = document.getElementById('reg-user');
 const signupPasswordInput = document.getElementById('reg-pass');
-const signupNameInput = document.getElementById('reg-name'); // لجلب اسم الطالب
+const signupNameInput = document.getElementById('reg-name');
 const signupBtn = document.getElementById('signup-btn');
+
+// --- البريد الإلكتروني المعتمد للأدمن ---
+const ADMIN_EMAIL = "modi572008@gmail.com";
 
 // 1. برمجة زر "تسجيل الدخول"
 if (loginBtn) {
@@ -37,20 +40,21 @@ if (loginBtn) {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // --- السطر السحري لربط فايربيز بواجهة المواد الخاصة بك ---
-                
-                // البحث عن بيانات الطالب محلياً أو إنشاء ملف جديد له
+                let role = 'student';
+                if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    role = 'admin';
+                }
+
                 let found = studentsList.find(s => String(s.id).toLowerCase() === email.toLowerCase());
                 if (!found) {
-                    found = { id: email, name: email.split('@')[0], role: 'student', xp: 0 };
+                    found = { id: email, name: email.split('@')[0], role: role, xp: role === 'admin' ? 1000 : 0 };
                     studentsList.push(found);
                     saveData();
                 }
                 
-                // تفعيل حساب الطالب في المنصة
                 currentUser = {
                     ...found,
-                    role: 'student',
+                    role: role,
                     studied: found.studied || [],
                     fileScores: found.fileScores || {},
                     quizScores: found.quizScores || {},
@@ -59,8 +63,11 @@ if (loginBtn) {
                     tasksDone: found.tasksDone || []
                 };
                 
-                // تشغيل دالة بناء المواد الأصلية
-                enterPlatform("تم تسجيل الدخول بنجاح! أهلاً بك.");
+                if (currentUser.role === 'admin') {
+                    enterPlatform("أهلاً بك يا بطل (الأدمن) في لوحة التحكم الخاصة بك! 🚀");
+                } else {
+                    enterPlatform("تم تسجيل الدخول بنجاح! أهلاً بك.");
+                }
             })
             .catch((error) => {
                 alert("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
@@ -82,12 +89,16 @@ if (signupBtn) {
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // --- إعداد حساب الطالب الجديد داخل المنصة ---
+                let role = 'student';
+                if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    role = 'admin';
+                }
+
                 const newSt = { 
                     id: email, 
                     name: name, 
                     pass: password, 
-                    role: 'student', 
+                    role: role, 
                     xp: 50, 
                     studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] 
                 };
@@ -99,7 +110,6 @@ if (signupBtn) {
                 
                 currentUser = newSt;
                 
-                // تشغيل وبناء الموقع وإظهار المواد
                 enterPlatform('🎉 تم إنشاء الحساب بنجاح! حصلت على +50 XP');
             })
             .catch((error) => {
