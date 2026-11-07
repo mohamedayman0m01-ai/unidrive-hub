@@ -1,0 +1,3147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UniDrive Hub | البوابة الأكاديمية الذكية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= المتغيرات اللونية والتصميم (Sleek Dark Tech-Blue) ================= */
+        
+         :root {
+            --bg-main: #060a12;
+            --bg-secondary: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.94);
+            --bg-input: #05080f;
+            --border-color: rgba(56, 189, 248, 0.16);
+            --border-glow: rgba(0, 210, 255, 0.55);
+            --primary: #3b82f6;
+            --accent: #00d2ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 35%), radial-gradient(circle at 90% 90%, rgba(0, 210, 255, 0.10) 0%, transparent 35%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            border: none;
+            outline: none;
+        }
+        
+        button {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* ================= البطاقات والأزرار ================= */
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .card:hover {
+            border-color: var(--border-glow);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 15px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            user-select: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(0, 210, 255, 0.28);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+        
+        .btn-ai {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
+        }
+        
+        .btn-ai:hover:not(:disabled) {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.9);
+            color: var(--text-main);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-success {
+            background: rgba(16, 185, 129, 0.16);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-warning {
+            background: rgba(245, 158, 11, 0.16);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.16);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+        }
+        
+        .btn-sm {
+            padding: 6px 11px;
+            font-size: 0.8rem;
+            border-radius: var(--radius-sm);
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+        
+        .badge-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.35);
+        }
+        
+        .badge-cyan {
+            background: rgba(0, 210, 255, 0.15);
+            color: #22d3ee;
+            border: 1px solid rgba(0, 210, 255, 0.35);
+        }
+        
+        .badge-emerald {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+        
+        .badge-amber {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+        
+        .badge-purple {
+            background: rgba(168, 85, 247, 0.18);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+        }
+        
+        .badge-red {
+            background: rgba(239, 68, 68, 0.18);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+        
+        .form-group {
+            margin-bottom: 13px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: var(--radius-md);
+            padding: 10px 13px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.15);
+        }
+        /* ================= شريط تنبيهات الدفعة والعداد التنازلي ================= */
+        
+        .announcement-bar {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.16), rgba(0, 210, 255, 0.12), rgba(168, 85, 247, 0.15));
+            border: 1px solid rgba(0, 210, 255, 0.35);
+            border-radius: var(--radius-lg);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .countdown-grid {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            direction: ltr;
+        }
+        
+        .cd-unit {
+            background: rgba(5, 8, 15, 0.85);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 10px;
+            padding: 6px 10px;
+            min-width: 54px;
+            text-align: center;
+        }
+        
+        .cd-num {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1.1;
+        }
+        
+        .cd-lbl {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        /* ================= شاشة تسجيل الدخول ================= */
+        
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        
+        .auth-card {
+            width: 100%;
+            max-width: 920px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glow);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+        }
+        
+        .auth-info-side {
+            padding: 34px 28px;
+            background: linear-gradient(150deg, rgba(59, 130, 246, 0.16), rgba(15, 23, 42, 0.96));
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .auth-form-side {
+            padding: 34px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--bg-input);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .auth-tab {
+            padding: 9px;
+            border-radius: 9px;
+            font-weight: 700;
+            font-size: 0.86rem;
+            background: transparent;
+            color: var(--text-muted);
+        }
+        
+        .auth-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+        }
+        /* ================= الهيدر وشريط التنقل ================= */
+        
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(6, 10, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            height: 66px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        
+        .nav-links-desktop {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .nav-btn {
+            padding: 7px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            background: transparent;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-btn:hover {
+            color: #fff;
+            background: rgba(30, 41, 59, 0.6);
+        }
+        
+        .nav-btn.active {
+            background: rgba(0, 210, 255, 0.16);
+            color: #22d3ee;
+            border: 1px solid rgba(0, 210, 255, 0.35);
+        }
+        
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            z-index: 45;
+            background: rgba(6, 10, 18, 0.97);
+            backdrop-filter: blur(14px);
+            border-top: 1px solid var(--border-color);
+            padding: 6px 6px;
+            justify-content: space-around;
+        }
+        
+        .mobile-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 5px 2px;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+        
+        .mobile-nav-item.active {
+            color: #22d3ee;
+            background: rgba(0, 210, 255, 0.12);
+        }
+        /* ================= الشبكات والحاويات ================= */
+        
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 16px 92px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-box {
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 14px;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+            gap: 15px;
+        }
+        
+        .subject-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        
+        .pill-btn {
+            padding: 6px 13px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            color: var(--text-muted);
+        }
+        
+        .pill-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            border-color: transparent;
+        }
+        /* ================= عارض ملفات Google Drive النظيف والمريح داخل الموقع ================= */
+        
+        .drive-viewer-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            background: rgba(4, 7, 13, 0.92);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .drive-viewer-box {
+            width: 100%;
+            max-width: 1140px;
+            height: 92vh;
+            background: #0b1324;
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+        }
+        
+        .drive-viewer-box.fullscreen-mode {
+            max-width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            border: none;
+        }
+        
+        .drive-viewer-header {
+            padding: 11px 16px;
+            background: #070c18;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .drive-viewer-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        
+        .drive-frame-container {
+            position: relative;
+            flex: 1;
+            width: 100%;
+            background: #050811;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .drive-iframe {
+            width: 100%;
+            height: 100%;
+            flex: 1;
+            border: none;
+            background: #090e1a;
+        }
+        
+        .drive-popout-blocker {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 64px;
+            height: 58px;
+            z-index: 15;
+            background: #070c18;
+            border-bottom-left-radius: 10px;
+            border-left: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            color: var(--accent);
+            font-weight: 800;
+            user-select: none;
+        }
+        /* ================= النوافذ المنبثقة ================= */
+        
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(4, 7, 14, 0.85);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+        }
+        
+        .modal-dialog {
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+        
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
+        .clean-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            min-width: 520px;
+        }
+        
+        .clean-table th,
+        .clean-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+            font-size: 0.86rem;
+        }
+        
+        .clean-table th {
+            color: var(--text-muted);
+            font-size: 0.76rem;
+            background: rgba(6, 10, 18, 0.6);
+        }
+        
+        .toast-box {
+            position: fixed;
+            bottom: 78px;
+            left: 16px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .toast-msg {
+            background: #0f172a;
+            border: 1px solid var(--border-glow);
+            border-right: 4px solid var(--accent);
+            color: #fff;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+        /* شرح الإجابات في الكويز */
+        
+        .explanation-card {
+            background: rgba(5, 8, 15, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            text-align: right;
+            font-size: 0.82rem;
+        }
+        /* استجابة الموبايل والتابلت */
+        
+        @media (max-width: 900px) {
+            .auth-card {
+                grid-template-columns: 1fr;
+            }
+            .auth-info-side {
+                border-left: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 22px 18px;
+            }
+            .auth-form-side {
+                padding: 22px 18px;
+            }
+            .nav-links-desktop {
+                display: none;
+            }
+            .mobile-bottom-nav {
+                display: flex;
+            }
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .drive-viewer-modal {
+                padding: 0;
+            }
+            .drive-viewer-box {
+                height: 100vh;
+                max-width: 100vw;
+                border-radius: 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .drive-viewer-header {
+                padding: 10px 12px;
+            }
+            .drive-viewer-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .btn-sm {
+                padding: 6px 9px;
+                font-size: 0.75rem;
+            }
+        }
+        /* إضافات خفيفة لمتابعة التقدم ولوحة الإدارة */
+        
+        .progress-track {
+            height: 9px;
+            background: rgba(148, 163, 184, .16);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), #38bdf8);
+            transition: width .25s ease;
+        }
+        
+        .mini-stat {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+        }
+        
+        .mini-stat strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+        
+        .admin-tools-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- حاوية الإشعارات -->
+    <div id="toast-box" class="toast-box"></div>
+
+    <!-- إطار مخفي للتحميل المباشر داخل الموقع دون مغادرة الصفحة -->
+    <iframe id="direct-download-iframe" class="hidden" title="Direct Download"></iframe>
+
+    <!-- ================= 1. شاشة تسجيل الدخول والترحيب ================= -->
+    <div id="auth-view" class="auth-page">
+        <div class="auth-card">
+
+            <!-- معلومات المنصة -->
+            <div class="auth-info-side">
+                <div>
+                    <div class="brand-header" style="margin-bottom: 18px;">
+                        <div class="brand-icon">U</div>
+                        <div>
+                            <div style="font-size: 1.35rem; font-weight: 900;">UniDrive <span style="color: var(--accent);">Hub</span></div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">بوابتك الجامعية لملفات المحاضرات والمذاكرة
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 style="font-size: 1.4rem; font-weight: 900; line-height: 1.4; margin-bottom: 10px;">
+                        ملفات محاضراتك على Google Drive في مكان واحد
+                    </h1>
+                    <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
+                        افتح ملفات المحاضرات والسكاشن والشيتات من مكان واحد، واحفظ المهم للمراجعة، وتابع تقدمك وحل الاختبارات والتاسكات.
+                    </p>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px; direction: ltr; justify-content: flex-end;">
+                        <span class="badge badge-cyan">Programming 1</span>
+                        <span class="badge badge-cyan">CT</span>
+                        <span class="badge badge-cyan">Statistics</span>
+                        <span class="badge badge-cyan">Math 1</span>
+                        <span class="badge badge-cyan">Math 0</span>
+                        <span class="badge badge-cyan">Physics</span>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 12px;">
+                    ✨ متوافق 100% مع الكمبيوتر، التابلت، والهواتف الذكية.
+                </div>
+            </div>
+
+            <!-- نموذج الدخول / التسجيل -->
+            <div class="auth-form-side">
+                <div class="auth-tabs">
+                    <button type="button" id="tab-login" class="auth-tab active" onclick="toggleAuthMode('login')">تسجيل
+                        الدخول</button>
+                    <button type="button" id="tab-register" class="auth-tab" onclick="toggleAuthMode('register')">حساب
+                        طالب جديد</button>
+                </div>
+
+                <!-- تسجيل الدخول -->
+                <form id="form-login">
+                    <div class="form-group">
+                        <label class="form-label">البريد الأكاديمي أو الكود الجامعي</label>
+                        <input type="text" id="login-user" class="form-control" required placeholder="مثال: 202601 أو البريد الإلكتروني" dir="ltr">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور</label>
+                        <input type="password" id="login-pass" class="form-control" required placeholder="••••••••" dir="ltr">
+                    </div>
+                    <button type="button" id="login-btn" class="btn btn-primary btn-block" style="padding: 12px; margin-top: 6px;">
+                        دخول إلى المنصة ⬅
+                    </button>
+
+                    <div style="text-align: center; margin: 12px 0; font-size: 0.78rem; color: var(--text-muted);">أو
+                    </div>
+
+                    <button type="button" onclick="startGuestMode()" class="btn btn-secondary btn-block">
+                        👁️ تصفح كزائر (عرض العناوين فقط)
+                    </button>
+                </form>
+
+                <!-- حساب طالب جديد -->
+                <form id="form-register" class="hidden">
+                    <div class="form-group">
+                        <label class="form-label">اسم الطالب الكامل</label>
+                        <input type="text" id="reg-name" class="form-control" required placeholder="اكتب اسمك الثلاثي">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الكود الجامعي أو البريد الأكاديمي</label>
+                        <input type="text" id="reg-user" class="form-control" required placeholder="مثال: 2026105" dir="ltr">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور</label>
+                        <input type="password" id="reg-pass" class="form-control" required minlength="4" placeholder="••••••••" dir="ltr">
+                    </div>
+                    <button type="button" id="signup-btn" class="btn btn-primary btn-block" style="padding: 12px; margin-top: 6px;">                        إنشاء الحساب والدخول فوراً (+50 XP)
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= 2. الواجهة الرئيسية للمنصة ================= -->
+    <div id="app-view" class="hidden">
+
+        <!-- الشريط العلوي -->
+        <header class="top-navbar">
+            <div class="navbar-container">
+                <div class="brand-header" style="cursor: pointer;" onclick="showSection('home')">
+                    <div class="brand-icon" style="width: 36px; height: 36px; font-size: 1.1rem;">U</div>
+                    <div>
+                        <div style="font-weight: 900; font-size: 1rem;">UniDrive <span style="color: var(--accent);">Hub</span></div>
+                        <span id="role-badge" class="badge badge-blue" style="font-size: 0.66rem; padding: 1px 7px;">طالب</span>
+                    </div>
+                </div>
+
+                <!-- روابط الكمبيوتر -->
+                <nav class="nav-links-desktop">
+                    <button id="dnav-home" class="nav-btn active" onclick="showSection('home')">🏠 الرئيسية</button>
+                    <button id="dnav-materials" class="nav-btn" onclick="showSection('materials')">📂 ملفات
+                        المواد</button>
+                    <button id="dnav-bookmarks" class="nav-btn" onclick="showSection('bookmarks')">⭐ المحفوظات (<span
+                            id="nav-bm-count">0</span>)</button>
+                    <button id="dnav-quizzes" class="nav-btn" onclick="showSection('quizzes')">⚡ الكويزات
+                        والتاسكات</button>
+                    <button id="dnav-leaderboard" class="nav-btn" onclick="showSection('leaderboard')">🏆
+                        المتصدرون</button>
+                    <button id="dnav-admin" class="nav-btn hidden" onclick="showSection('admin')" style="color: #fbbf24;">⚙️ لوحة الأدمن</button>
+                </nav>
+
+                <!-- معلومات المستخدم والخروج -->
+                <div style="display: flex; align-items: center; gap: 7px;">
+                    <div class="badge badge-cyan" style="font-size: 0.82rem; padding: 5px 10px;">
+                        ⚡ <span id="user-xp-display">0</span> XP
+                    </div>
+                    <span id="user-name-display" style="font-weight: 700; font-size: 0.82rem; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                    <button onclick="logoutUser()" class="btn btn-danger btn-sm">خروج</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- شريط التنقل السفلي للموبايل والتابلت -->
+        <nav class="mobile-bottom-nav">
+            <button id="mnav-home" class="mobile-nav-item active" onclick="showSection('home')">
+                <span style="font-size: 1.05rem;">🏠</span>
+                <span>الرئيسية</span>
+            </button>
+            <button id="mnav-materials" class="mobile-nav-item" onclick="showSection('materials')">
+                <span style="font-size: 1.05rem;">📂</span>
+                <span>المحاضرات</span>
+            </button>
+            <button id="mnav-bookmarks" class="mobile-nav-item" onclick="showSection('bookmarks')">
+                <span style="font-size: 1.05rem;">⭐</span>
+                <span>محفوظاتي</span>
+            </button>
+            <button id="mnav-quizzes" class="mobile-nav-item" onclick="showSection('quizzes')">
+                <span style="font-size: 1.05rem;">⚡</span>
+                <span>الكويزات</span>
+            </button>
+            <button id="mnav-leaderboard" class="mobile-nav-item" onclick="showSection('leaderboard')">
+                <span style="font-size: 1.05rem;">🏆</span>
+                <span>الترتيب</span>
+            </button>
+            <button id="mnav-admin" class="mobile-nav-item hidden" onclick="showSection('admin')" style="color: #fbbf24;">
+                <span style="font-size: 1.05rem;">⚙️</span>
+                <span>الأدمن</span>
+            </button>
+        </nav>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-container">
+
+            <!-- 1. شريط تنبيهات الدفعة العاجلة + العداد التنازلي للامتحانات -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px;">
+                <!-- تنبيهات الدفعة -->
+                <div class="announcement-bar">
+                    <div style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1;">
+                        <span class="badge badge-amber" style="flex-shrink: 0;">📢 تنبيه الدفعة</span>
+                        <div id="urgent-announcement-text" style="font-size: 0.86rem; font-weight: 700; color: #f8fafc;">
+                            كويز Programming 1 و Statistics القادم في المحاضرات 1 و 2 — راجع الملفات وحل تاسكات الـ AI!
+                        </div>
+                    </div>
+                    <button id="edit-announcement-btn" onclick="openAnnouncementModal()" class="btn btn-secondary btn-sm hidden">✏️ تعديل التنبيه</button>
+                </div>
+
+                <!-- العداد التنازلي للامتحانات -->
+                <div class="card" style="padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <div style="font-size: 0.74rem; color: var(--accent); font-weight: 800;">⏳ العد التنازلي للامتحانات
+                        </div>
+                        <div id="exam-title-display" style="font-size: 0.92rem; font-weight: 900;">امتحانات الميدتيرم (Midterm Exams)</div>
+                    </div>
+                    <div class="countdown-grid">
+                        <div class="cd-unit">
+                            <div id="cd-days" class="cd-num">14</div>
+                            <div class="cd-lbl">يوم</div>
+                        </div>
+                        <div class="cd-unit">
+                            <div id="cd-hours" class="cd-num">08</div>
+                            <div class="cd-lbl">ساعة</div>
+                        </div>
+                        <div class="cd-unit">
+                            <div id="cd-mins" class="cd-num">45</div>
+                            <div class="cd-lbl">دقيقة</div>
+                        </div>
+                        <div class="cd-unit">
+                            <div id="cd-secs" class="cd-num">12</div>
+                            <div class="cd-lbl">ثانية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="padding:16px;">
+                <h3 style="font-size:1rem;font-weight:900;margin-bottom:10px;">📢 آخر الإشعارات</h3>
+                <div id="student-announcements-list" style="display:grid;gap:8px;"></div>
+            </div>
+            <div class="card" style="padding:16px;">
+                <h3 style="font-size:1rem;font-weight:900;margin-bottom:10px;">📅 جدول الامتحانات</h3>
+                <div id="student-exams-list" style="display:grid;gap:8px;"></div>
+            </div>
+
+            <!-- شريط سريع للمشرف فقط -->
+            <div id="admin-quick-bar" class="card hidden" style="padding: 15px 18px; border-color: rgba(245, 158, 11, 0.5); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;">
+                <div>
+                    <span class="badge badge-amber">🛡️ صلاحية المشرف العام (Admin)</span>
+                    <span style="font-weight: 800; font-size: 0.88rem; margin-right: 6px;">ارفع محاضرة وولّد لها كويز
+                        وتاسك بالذكاء الاصطناعي بضغطة واحدة!</span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button onclick="openAddFileModal()" class="btn btn-ai btn-sm">📄 إضافة ملف للمادة</button>
+                    <button onclick="openAddQuizModal()" class="btn btn-warning btn-sm">+ كويز يدوي</button>
+                    <button onclick="showSection('admin')" class="btn btn-secondary btn-sm">🛠️ البلاغات والإدارة (<span
+                            id="admin-reports-badge">0</span>)</button>
+                </div>
+            </div>
+
+            <!-- ====== قسم 1: الرئيسية والمقررات الستة ====== -->
+            <section id="sec-home" style="display: flex; flex-direction: column; gap: 20px;">
+
+                <!-- إحصائيات سريعة -->
+                <div class="stats-row">
+                    <div class="card stat-box">
+                        <div style="font-size: 1.6rem;">📚</div>
+                        <div>
+                            <div style="font-size: 0.74rem; color: var(--text-muted);">المقررات الدراسية</div>
+                            <div style="font-size: 1.25rem; font-weight: 900;">6 مواد</div>
+                        </div>
+                    </div>
+                    <div class="card stat-box">
+                        <div style="font-size: 1.6rem;">📂</div>
+                        <div>
+                            <div style="font-size: 0.74rem; color: var(--text-muted);">ملفات الدرايف</div>
+                            <div id="stat-files-count" style="font-size: 1.25rem; font-weight: 900;">0</div>
+                        </div>
+                    </div>
+                    <div class="card stat-box">
+                        <div style="font-size: 1.6rem;">🤖</div>
+                        <div>
+                            <div style="font-size: 0.74rem; color: var(--text-muted);">كويزات وتاسكات AI</div>
+                            <div id="stat-quizzes-count" style="font-size: 1.25rem; font-weight: 900;">0</div>
+                        </div>
+                    </div>
+                    <div class="card stat-box">
+                        <div style="font-size: 1.6rem;">⚡</div>
+                        <div>
+                            <div style="font-size: 0.74rem; color: var(--text-muted);">نقاطك (XP)</div>
+                            <div id="stat-xp-count" style="font-size: 1.25rem; font-weight: 900; color: var(--accent);">
+                                0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- متابعة تقدم الطالب: ملخص صغير بدون إضافة صفحات جديدة -->
+                <div id="student-progress-card" class="card" style="padding:16px; display:flex; flex-direction:column; gap:11px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                        <div>
+                            <h3 style="font-size:1rem; font-weight:900;">📈 تقدمك في المذاكرة</h3>
+                            <p style="font-size:.76rem; color:var(--text-muted);">متابعة المحاضرات والاختبارات والتاسكات التي أنجزتها</p>
+                        </div>
+                        <span id="progress-percent" class="badge badge-cyan">0% إنجاز</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;">
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">محاضرات
+                                مذاكرة</span><strong id="progress-studied">0</strong></div>
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">اختبارات
+                                محلولة</span><strong id="progress-quizzes">0</strong></div>
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">تاسكات
+                                مسلّمة</span><strong id="progress-tasks">0</strong></div>
+                    </div>
+                </div>
+
+                <!-- بطاقات المواد الـ 6 -->
+                <div>
+                    <h2 style="font-size: 1.12rem; font-weight: 900; margin-bottom: 12px;">📚 اختر المادة لفتح محاضراتها وملفاتها:
+                    </h2>
+                    <div id="courses-grid" class="courses-grid"></div>
+                </div>
+
+                <!-- أحدث الملفات -->
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                        <h2 style="font-size: 1.12rem; font-weight: 900;">🆕 أحدث المحاضرات المرفوعة</h2>
+                        <button onclick="showSection('materials')" class="btn btn-secondary btn-sm">كل الملفات
+                            ⬅</button>
+                    </div>
+                    <div id="recent-materials-grid" class="materials-grid"></div>
+                </div>
+            </section>
+
+            <!-- ====== قسم 2: مكتبة ملفات Google Drive (مع فلاتر التصنيف) ====== -->
+            <section id="sec-materials" class="hidden" style="display: flex; flex-direction: column; gap: 15px;">
+                <div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+                        <div>
+                            <h2 style="font-size: 1.2rem; font-weight: 900;">📂 مكتبة ملفات المواد والمحاضرات</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">ملفات المحاضرات والسكاشن والشيتات والملخصات المرفوعة لكل مادة؛ لا توجد مكتبة فيديوهات.</p>
+                        </div>
+                        <input type="text" id="search-input" oninput="renderMaterials()" class="form-control" style="max-width: 270px;" placeholder="🔍 ابحث باسم المحاضرة...">
+                    </div>
+
+                    <!-- فلتر المادة -->
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 700;">
+                            تصفية حسب المادة:</div>
+                        <div id="subject-filter-pills" class="subject-pills"></div>
+                    </div>
+
+                    <!-- فلتر نوع الملف داخل المادة (محاضرات / سكاشن / شيتات / ملخصات) -->
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 700;">
+                            تصفية حسب القسم:</div>
+                        <div id="type-filter-pills" class="subject-pills"></div>
+                    </div>
+                </div>
+
+                <div id="all-materials-grid" class="materials-grid"></div>
+            </section>
+
+            <!-- ====== قسم 3: ملفاتي المحفوظة (Bookmarks ⭐) ====== -->
+            <section id="sec-bookmarks" class="hidden" style="display: flex; flex-direction: column; gap: 15px;">
+                <div class="card" style="padding: 18px;">
+                    <h2 style="font-size: 1.2rem; font-weight: 900;">⭐ ملفاتي المحفوظة للمراجعة (Bookmarks)</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">جميع المحاضرات والشيتات التي قمت بحفظها للرجوع إليها سريعاً ليلة الامتحان.</p>
+                </div>
+                <div id="bookmarks-materials-grid" class="materials-grid"></div>
+            </section>
+
+            <!-- ====== قسم 4: الكويزات والتاسكات التفاعلية (مع دعم الذكاء الاصطناعي وتفسير الإجابات) ====== -->
+            <section id="sec-quizzes" class="hidden" style="display: flex; flex-direction: column; gap: 18px;">
+                <div class="card" style="padding: 18px;">
+                    <h2 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 4px;">⚡ ساحة الكويزات والتاسكات الذكية (AI Quizzes & Tasks)</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">حل الكويزات مع شرح وتفسير كامل لكل إجابة بعد الانتهاء، وأنجز تاسكات المحاضرات لمضاعفة نقاطك XP.</p>
+                    <div id="quiz-filter-pills" class="subject-pills"></div>
+                </div>
+
+                <!-- قائمة الكويزات -->
+                <div>
+                    <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 10px;">📝 الاختبارات التفاعلية (مع تفسير الإجابات):</h3>
+                    <div id="all-quizzes-grid" class="materials-grid"></div>
+                </div>
+
+                <!-- قائمة التاسكات والواجبات العملية -->
+                <div>
+                    <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 10px;">💻 التاسكات والمهام التطبيقية للمحاضرات (Tasks):</h3>
+                    <div id="all-tasks-grid" class="materials-grid"></div>
+                </div>
+            </section>
+
+            <!-- ====== قسم 5: لوحة الشرف والمتصدرين ====== -->
+            <section id="sec-leaderboard" class="hidden" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="card" style="padding: 18px;">
+                    <h2 style="font-size: 1.2rem; font-weight: 900;">🏆 لوحة شرف الطلاب المتصدرين</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">الترتيب يُحدث تلقائياً حسب مذاكرة الملفات وحل الكويزات وإنجاز التاسكات.</p>
+                </div>
+
+                <div class="card" style="overflow: hidden;">
+                    <div class="table-wrap">
+                        <table class="clean-table">
+                            <thead>
+                                <tr>
+                                    <th>المركز</th>
+                                    <th>اسم الطالب</th>
+                                    <th>الكود</th>
+                                    <th>محاضرات وتاسكات</th>
+                                    <th>النقاط (XP)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-rows"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====== قسم 6: لوحة إدارة المشرف (Admin Panel) ====== -->
+            <section id="sec-admin" class="hidden" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="card" style="padding: 20px;">
+                    <h2 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 6px;">⚙️ لوحة تحكم المشرف العام (Admin Dashboard)</h2>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">تحكم كامل في ملفات Google Drive، توليد الكويزات والتاسكات بالذكاء الاصطناعي، تحديث التنبيهات، ومراجعة بلاغات الروابط.
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="openAddFileModal()" class="btn btn-ai">📄 إضافة ملف للمادة</button>
+                        <button onclick="openAddQuizModal()" class="btn btn-warning">+ إنشاء كويز يدوي</button>
+                        <button onclick="openAnnouncementModal()" class="btn btn-secondary">📢 تعديل تنبيه الدفعة
+                            والعداد</button>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:18px;">
+                    <h3 style="font-size:1.08rem;font-weight:900;margin-bottom:12px;">📢 إدارة إشعارات الطلاب</h3>
+                    <form id="admin-notice-form" onsubmit="saveNotice(event)" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
+                        <input type="hidden" id="notice-edit-id">
+                        <div class="form-group"><label class="form-label">عنوان الإشعار</label><input id="notice-title" class="form-control" required placeholder="مثال: تغيير موعد المحاضرة"></div>
+                        <div class="form-group"><label class="form-label">نوع الإشعار</label><select id="notice-type" class="form-control">
+                                <option value="normal">إعلان عادي</option>
+                                <option value="important">مهم</option>
+                                <option value="urgent">عاجل</option>
+                                <option value="exam">امتحان</option>
+                            </select></div>
+                        <div class="form-group"><label class="form-label">يظهر بداية من (اختياري)</label><input id="notice-start" type="datetime-local" class="form-control" dir="ltr"></div>
+                        <div class="form-group"><label class="form-label">ينتهي في (اختياري)</label><input id="notice-end" type="datetime-local" class="form-control" dir="ltr"></div>
+                        <div class="form-group" style="grid-column:1/-1"><label class="form-label">نص
+                                الإشعار</label><textarea id="notice-body" class="form-control" rows="2" required placeholder="اكتب التفاصيل التي ستظهر للطلاب"></textarea></div>
+                        <div style="grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" type="submit">💾 حفظ ونشر الإشعار</button><button class="btn btn-secondary" type="button" onclick="resetNoticeForm()">إلغاء
+                                التعديل</button></div>
+                    </form>
+                    <div id="admin-notices-list" style="display:grid;gap:8px;margin-top:14px;"></div>
+                </div>
+                <div class="card" style="padding:18px;">
+                    <h3 style="font-size:1.08rem;font-weight:900;margin-bottom:12px;">📅 إدارة مواعيد الامتحانات</h3>
+                    <form id="admin-exam-form" onsubmit="saveExam(event)" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
+                        <input type="hidden" id="exam-edit-id">
+                        <div class="form-group"><label class="form-label">اسم الامتحان</label><input id="exam-name" class="form-control" required placeholder="مثال: Midterm Exam"></div>
+                        <div class="form-group"><label class="form-label">المادة</label><input id="exam-subject" class="form-control" required placeholder="مثال: Programming 1"></div>
+                        <div class="form-group"><label class="form-label">التاريخ والوقت</label><input id="exam-datetime" type="datetime-local" class="form-control" required dir="ltr"></div>
+                        <div class="form-group"><label class="form-label">ملاحظات (اختياري)</label><input id="exam-notes" class="form-control" placeholder="القاعة أو تعليمات إضافية"></div>
+                        <div style="grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" type="submit">💾 حفظ موعد الامتحان</button><button class="btn btn-secondary" type="button" onclick="resetExamForm()">إلغاء التعديل</button>
+                        </div>
+                    </form>
+                    <div id="admin-exams-list" style="display:grid;gap:8px;margin-top:14px;"></div>
+                </div>
+
+                <div class="card" style="padding:16px;">
+                    <h3 style="font-size:1rem;font-weight:900;margin-bottom:10px;">📊 ملخص المنصة</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px;">
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">حسابات
+                                الطلاب</span><strong id="admin-students-count">0</strong></div>
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">ملفات
+                                المواد</span><strong id="admin-files-count">0</strong></div>
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">الاختبارات</span><strong id="admin-quizzes-count">0</strong></div>
+                        <div class="mini-stat"><span style="font-size:.72rem;color:var(--text-muted);">التاسكات</span><strong id="admin-tasks-count">0</strong></div>
+                    </div>
+                    <div class="admin-tools-row" style="margin-top:12px;">
+                        <button type="button" onclick="exportPlatformBackup()" class="btn btn-secondary btn-sm">⬇️ تنزيل
+                            نسخة احتياطية</button>
+                        <button type="button" onclick="document.getElementById('backup-import-input').click()" class="btn btn-secondary btn-sm">⬆️ استعادة نسخة</button>
+                        <input id="backup-import-input" type="file" accept="application/json,.json" class="hidden" onchange="importPlatformBackup(event)">
+                    </div>
+                    <p style="font-size:.72rem;color:var(--text-muted);margin-top:8px;">تنبيه: النسخة الحالية تحفظ البيانات داخل المتصفح؛ النسخة الاحتياطية تساعدك على نقلها أو استعادتها.</p>
+                </div>
+
+                <div class="card" style="padding:16px;">
+                    <h3 style="font-size:1rem;font-weight:900;margin-bottom:10px;">📨 تسليمات الطلاب</h3>
+                    <div id="admin-submissions-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+                </div>
+
+                <!-- بلاغات الروابط المعطلة من الطلاب -->
+                <div class="card" style="padding: 18px; border-color: rgba(239, 68, 68, 0.35);">
+                    <h3 style="font-size: 1rem; font-weight: 900; margin-bottom: 10px; color: #f87171;">⚠️ بلاغات الروابط المعطلة من الطلاب</h3>
+                    <div id="admin-reports-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+                    <div class="card" style="padding: 18px;">
+                        <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px;">📂 الملفات المرفوعة (يمكنك توليد AI لأي ملف)</h3>
+                        <div id="admin-files-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                    </div>
+                    <div class="card" style="padding: 18px;">
+                        <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px;">⚡ الكويزات والتاسكات الحالية
+                        </h3>
+                        <div id="admin-quizzes-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= 3. عارض ملفات Google Drive النظيف والمريح داخل الموقع ================= -->
+    <div id="drive-viewer-modal" class="drive-viewer-modal hidden">
+        <div id="drive-viewer-box" class="drive-viewer-box">
+
+            <!-- شريط علوي نظيف وبسيط كما طلب المستخدم بالضبط -->
+            <div class="drive-viewer-header">
+                <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+                    <span id="viewer-course-badge" class="badge badge-cyan">Course</span>
+                    <h3 id="viewer-file-title" style="font-size: 0.95rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        عنوان المحاضرة</h3>
+                </div>
+
+                <div class="drive-viewer-actions">
+                    <button id="viewer-studied-btn" onclick="handleLectureXPRequestFromViewer()" class="btn btn-success btn-sm">
+                        🎯 احصل على نقاط المذاكرة (امتحن أولاً)
+                    </button>
+                    <button onclick="downloadCurrentViewerFile()" class="btn btn-primary btn-sm">
+                        ⬇️ تحميل الملف
+                    </button>
+                    <button onclick="toggleViewerFullscreen()" class="btn btn-secondary btn-sm" title="تكبير الشاشة">
+                        ⛶ ملء الشاشة
+                    </button>
+                    <button onclick="closeDriveViewer()" class="btn btn-danger btn-sm">
+                        ✕ إغلاق
+                    </button>
+                </div>
+            </div>
+
+            <!-- منطقة عرض ملف Google Drive الفعلي مباشرة داخل الموقع -->
+            <div class="drive-frame-container">
+                <div class="drive-popout-blocker" title="عرض مريح داخل الموقع">🔒 داخلي</div>
+                <iframe id="drive-preview-iframe" class="drive-iframe" src="about:blank" allow="autoplay"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= 4. النوافذ المنبثقة (الزائر / الاختبار مع التفسير / التاسك / رفع ملف بالـ AI) ================= -->
+
+    <!-- تنبيه الزائر -->
+    <div id="modal-guest" class="modal-backdrop hidden">
+        <div class="modal-dialog" style="text-align: center; max-width: 420px;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🔒</div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 8px;">متاح للطلاب المسجلين فقط</h3>
+            <p id="guest-modal-text" style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 18px;">
+                أنت تتصفح الموقع كزائر. لفتح ومعاينة ملفات المحاضرات أو تحميلها أو حل الكويزات، يرجى تسجيل الدخول بحساب طالب.
+            </p>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="goToAuthFromGuest('register')" class="btn btn-primary" style="flex: 1;">إنشاء حساب
+                    طالب</button>
+                <button onclick="goToAuthFromGuest('login')" class="btn btn-secondary" style="flex: 1;">تسجيل
+                    الدخول</button>
+            </div>
+            <button onclick="closeModal('modal-guest')" style="margin-top: 14px; background: transparent; color: var(--text-muted); font-size: 0.8rem; text-decoration: underline;">
+                إغلاق والبقاء كزائر
+            </button>
+        </div>
+    </div>
+
+    <!-- نافذة تنبيه: يجب حل الاختبار أولاً للحصول على نقاط مذاكرة المحاضرة -->
+    <div id="modal-exam-gate" class="modal-backdrop hidden">
+        <div class="modal-dialog" style="text-align: center; max-width: 470px;">
+            <div style="font-size: 2.6rem; margin-bottom: 6px;">🎯</div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 8px; color: var(--accent);">
+                احصل على النقاط بعد إثبات فهمك!
+            </h3>
+            <p id="exam-gate-text" style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 14px; line-height: 1.7;">
+                لا يتم منح نقاط إتمام مذاكرة هذه المحاضرة بشكل مجاني؛ يجب عليك خوض الاختبار الخاص بها أولاً، وسيتم منحك النقاط (XP) تناسبياً بناءً على درجتك الفعلية في الامتحان!
+            </p>
+            <div style="background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 12px; padding: 10px 12px; margin-bottom: 16px; font-size: 0.8rem; color: #93c5fd; text-align: right;">
+                <div>✅ <strong>درجة كاملة (100%):</strong> تحصل على كامل النقاط + بونص تفوق.</div>
+                <div>⚡ <strong>درجة متوسطة:</strong> تحصل على نقاط بنسبة إجاباتك الصحيحة.</div>
+                <div>🔄 <strong>درجة 0%:</strong> لن تحصل على نقاط ويمكنك إعادة المذاكرة والمحاولة مجدداً.</div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="exam-gate-start-btn" class="btn btn-primary" style="flex: 1;">
+                    🚀 ابدأ اختبار المحاضرة الآن
+                </button>
+                <button onclick="closeModal('modal-exam-gate')" class="btn btn-secondary">
+                    أكمل المذاكرة أولاً
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة حل الاختبار + مراجعة وتفسير الإجابات -->
+    <div id="modal-quiz" class="modal-backdrop hidden">
+        <div class="modal-dialog" style="max-width: 620px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 14px;">
+                <div>
+                    <span id="qmodal-subject" class="badge badge-cyan">Subject</span>
+                    <h3 id="qmodal-title" style="font-size: 1.02rem; font-weight: 900; margin-top: 4px;">عنوان الاختبار
+                    </h3>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="badge badge-amber" style="font-size: 0.85rem; padding: 5px 10px;">⏱️ <span
+                            id="qmodal-timer">01:30</span></span>
+                    <button onclick="closeQuizModal()" class="btn btn-danger btn-sm">✕</button>
+                </div>
+            </div>
+
+            <div id="qmodal-body">
+                <div id="qmodal-step" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">السؤال 1
+                </div>
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-bottom: 14px;">
+                    <h4 id="qmodal-question" style="font-size: 0.98rem; font-weight: 800;">نص السؤال</h4>
+                </div>
+                <div id="qmodal-options" style="display: flex; flex-direction: column; gap: 9px;"></div>
+            </div>
+
+            <div id="qmodal-result" class="hidden" style="padding: 8px 0;">
+                <div style="text-align: center; margin-bottom: 14px;">
+                    <div style="font-size: 2.4rem; margin-bottom: 4px;">🎉</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 4px;">انتهى الاختبار!</h3>
+                    <p id="qmodal-score-text" style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 10px;"></p>
+                    <div id="qmodal-xp-earned" class="badge badge-emerald" style="font-size: 0.92rem; padding: 7px 14px;">+100 XP</div>
+                </div>
+
+                <!-- قسم تفسير الإجابات والقوانين المستخدمة -->
+                <div style="margin-top: 12px; margin-bottom: 14px;">
+                    <div style="font-size: 0.85rem; font-weight: 900; color: var(--accent); margin-bottom: 8px;">💡 مراجعة الأسئلة وتفسير الإجابات الصحيحة:</div>
+                    <div id="qmodal-explanations-list" style="max-height: 260px; overflow-y: auto; padding-left: 4px;">
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button onclick="closeQuizModal()" class="btn btn-primary btn-block">إغلاق والعودة للمنصة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة عرض وتسليم التاسك التطبيقي للمحاضرة -->
+    <div id="modal-task" class="modal-backdrop hidden">
+        <div class="modal-dialog">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span id="tmodal-subject" class="badge badge-purple">Task</span>
+                <button onclick="closeModal('modal-task')" class="btn btn-secondary btn-sm">✕</button>
+            </div>
+            <h3 id="tmodal-title" style="font-size: 1.08rem; font-weight: 900; margin-bottom: 10px;">عنوان التاسك</h3>
+            <div id="tmodal-desc" style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 14px; border-radius: 12px; font-size: 0.88rem; margin-bottom: 14px; line-height: 1.7;">
+            </div>
+
+            <form onsubmit="submitStudentTask(event)">
+                <div class="form-group">
+                    <label class="form-label">إجابتك / الكود أو ملاحظات الحل (اختياري للتأكيد):</label>
+                    <textarea id="tmodal-answer" class="form-control" rows="3" placeholder="اكتب ملخص حلك أو الكود أو رابط الحل هنا..."></textarea>
+                </div>
+                <button type="submit" id="tmodal-submit-btn" class="btn btn-primary btn-block">✅ إتمام وتسليم التاسك
+                    (+50 XP)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة رفع ملف Google Drive + توليد كويز وتاسك بالذكاء الاصطناعي (للمشرف فقط) -->
+    <div id="modal-add-file" class="modal-backdrop hidden">
+        <div class="modal-dialog">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                <h3 style="font-size: 1.08rem; font-weight: 900;">☁️ إضافة ملف للمادة</h3>
+                <button onclick="closeModal('modal-add-file')" class="btn btn-secondary btn-sm">✕</button>
+            </div>
+            <form onsubmit="saveNewMaterial(event)">
+                <div class="form-group">
+                    <label class="form-label">عنوان المحاضرة أو الملف</label>
+                    <input type="text" id="in-file-title" class="form-control" required placeholder="مثال: Lecture 4 - Arrays & Loops in C++">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label class="form-label">المادة</label>
+                        <select id="in-file-subject" class="form-control">
+                            <option value="Programming 1">Programming 1</option>
+                            <option value="CT">CT</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Math 1">Math 1</option>
+                            <option value="Math 0">Math 0</option>
+                            <option value="Physics">Physics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">القسم / التصنيف</label>
+                        <select id="in-file-type" class="form-control">
+                            <option value="محاضرة">محاضرة (Lecture)</option>
+                            <option value="سكشن">سكشن وعملي (Section/Lab)</option>
+                            <option value="شيت">شيت وتاسك (Sheet)</option>
+                            <option value="ملخص">امتحانات وملخصات (Revision)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">رابط الملف من Google Drive</label>
+                    <input type="url" id="in-file-url" class="form-control" required placeholder="https://drive.google.com/file/d/.../view?usp=sharing" dir="ltr">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">أهم عناصر المحاضرة أو نص مختصر منها (يساعد الـ AI في عمل كويز وتاسك دقيق
+                        جداً)</label>
+                    <textarea id="in-file-notes" class="form-control" rows="2" placeholder="مثال: شرح الحلقات التكرارية for و while والمصفوفات أحادية البعد..."></textarea>
+                </div>
+
+                <!-- خيارات مرنة للأدمن عند رفع الملف (ملف فقط / ملف + كويز / ملف + كويز + تاسك) -->
+                <div class="form-group">
+                    <label class="form-label" style="color: #e9d5ff;">🤖 خيارات الذكاء الاصطناعي والمهام المرفقة مع
+                        الملف:</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(168, 85, 247, 0.4); padding: 12px; border-radius: 12px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
+                            <input type="radio" name="file-ai-mode" value="quiz_and_task" checked
+                                style="accent-color: #a855f7; width: 16px; height: 16px;">
+                            <span>🚀 إضافة الملف + إعداد كويز (للنقاط) + تاسك تطبيقي للدفعة</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
+                            <input type="radio" name="file-ai-mode" value="quiz_only"
+                                style="accent-color: #3b82f6; width: 16px; height: 16px;">
+                            <span>🧠 إضافة الملف + إعداد كويز فقط (بدون تاسك تطبيقي)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; font-weight: 700; cursor: pointer;">
+                            <input type="radio" name="file-ai-mode" value="file_only"
+                                style="accent-color: #10b981; width: 16px; height: 16px;">
+                            <span>📄 رفع الملف فقط (بدون تاسك وبدون كويز عام — يُختبر الطالب عند طلب النقاط)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" id="save-file-submit-btn" class="btn btn-ai btn-block">حفظ ونشر الملف بالخيار
+                    المحدد ✨</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة تعديل تنبيه الدفعة والعداد التنازلي (للمشرف) -->
+    <div id="modal-announcement" class="modal-backdrop hidden">
+        <div class="modal-dialog">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                <h3 style="font-size: 1.05rem; font-weight: 900;">📢 تحديث تنبيه الدفعة وموعد الامتحانات</h3>
+                <button onclick="closeModal('modal-announcement')" class="btn btn-secondary btn-sm">✕</button>
+            </div>
+            <form onsubmit="saveAnnouncementSettings(event)">
+                <div class="form-group">
+                    <label class="form-label">نص تنبيه الدفعة العاجل (يظهر أعلى الموقع للجميع)</label>
+                    <input type="text" id="in-ann-text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">عنوان العداد التنازلي (مثال: امتحانات الميدتيرم / الفاينل)</label>
+                    <input type="text" id="in-exam-title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">تاريخ الامتحان القادم</label>
+                    <input type="date" id="in-exam-date" class="form-control" required dir="ltr">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">حفظ التعديلات فوراً</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة مسابقة يدوية (للمشرف فقط) -->
+    <div id="modal-add-quiz" class="modal-backdrop hidden">
+        <div class="modal-dialog">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                <h3 style="font-size: 1.05rem; font-weight: 900;">⚡ إضافة كويز يدوي سريع</h3>
+                <button onclick="closeModal('modal-add-quiz')" class="btn btn-secondary btn-sm">✕</button>
+            </div>
+            <form onsubmit="saveNewQuiz(event)">
+                <div class="form-group">
+                    <label class="form-label">عنوان المسابقة</label>
+                    <input type="text" id="in-quiz-title" class="form-control" required placeholder="مثال: كويز سريع - Programming 1">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label class="form-label">المادة</label>
+                        <select id="in-quiz-subject" class="form-control">
+                            <option value="Programming 1">Programming 1</option>
+                            <option value="CT">CT</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Math 1">Math 1</option>
+                            <option value="Math 0">Math 0</option>
+                            <option value="Physics">Physics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">نقاط المكافأة (XP)</label>
+                        <input type="number" id="in-quiz-xp" class="form-control" value="100" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">السؤال</label>
+                    <input type="text" id="in-q-text" class="form-control" required placeholder="اكتب السؤال هنا">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                    <input type="text" id="in-q-c" class="form-control" required placeholder="✅ الإجابة الصحيحة">
+                    <input type="text" id="in-q-w1" class="form-control" required placeholder="❌ اختيار خاطئ 1">
+                    <input type="text" id="in-q-w2" class="form-control" required placeholder="❌ اختيار خاطئ 2">
+                    <input type="text" id="in-q-w3" class="form-control" required placeholder="❌ اختيار خاطئ 3">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">تفسير الإجابة الصحيحة (يظهر للطالب بعد الحل)</label>
+                    <input type="text" id="in-q-exp" class="form-control" placeholder="اكتب سبب صحة الإجابة أو القانون المستخدم...">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">نشر الكويز</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* --- 1. بيانات حساب المشرف السري --- */
+        const ADMIN_EMAIL = 'admin@unidrive.edu';
+        const ADMIN_PASS = 'UniAdmin#2026';
+
+        /* --- 2. المواد الدراسية الـ 6 --- */
+        const COURSES = [{
+            id: 'Programming 1',
+            name: 'Programming 1',
+            desc: 'أساسيات البرمجة بلغة C++ وحل المشكلات',
+            icon: '💻'
+        }, {
+            id: 'CT',
+            name: 'CT',
+            desc: 'التفكير الحاسوبي وخرائط التدفق',
+            icon: '🧠'
+        }, {
+            id: 'Statistics',
+            name: 'Statistics',
+            desc: 'الإحصاء والاحتمالات وتحليل البيانات',
+            icon: '📊'
+        }, {
+            id: 'Math 1',
+            name: 'Math 1',
+            desc: 'رياضيات 1 - تفاضل وتكامل',
+            icon: '📐'
+        }, {
+            id: 'Math 0',
+            name: 'Math 0',
+            desc: 'رياضيات 0 - أسس الجبر والدوال',
+            icon: '♾️'
+        }, {
+            id: 'Physics',
+            name: 'Physics',
+            desc: 'الفيزياء العامة والدوائر الكهربية',
+            icon: '⚛️'
+        }];
+
+        const FILE_TYPES = [{
+            id: 'all',
+            name: 'الكل'
+        }, {
+            id: 'محاضرة',
+            name: 'محاضرات (Lectures)'
+        }, {
+            id: 'سكشن',
+            name: 'سكاشن وعملي (Labs)'
+        }, {
+            id: 'شيت',
+            name: 'شيتات وتاسكات (Sheets)'
+        }, {
+            id: 'ملخص',
+            name: 'امتحانات وملخصات (Revisions)'
+        }];
+
+        /* --- 3. البيانات الأولية --- */
+        const INITIAL_FILES = [{
+            id: 'f1',
+            title: 'Lecture 1 - Introduction to C++ & Data Types',
+            subject: 'Programming 1',
+            type: 'محاضرة',
+            linkedQuizId: 'q1',
+            notes: 'Variables, int, float, double, cin, cout, arithmetic operators',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }, {
+            id: 'f2',
+            title: 'Lecture 1 - Problem Solving & Flowcharts',
+            subject: 'CT',
+            type: 'محاضرة',
+            linkedQuizId: 'q2',
+            notes: 'Decomposition, Pattern Recognition, Abstraction, Algorithm design',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }, {
+            id: 'f3',
+            title: 'Lecture 1 - Mean, Median, Mode & Variance',
+            subject: 'Statistics',
+            type: 'محاضرة',
+            linkedQuizId: 'q3',
+            notes: 'Central tendency measures, sample variance and standard deviation',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }, {
+            id: 'f4',
+            title: 'Sheet 1 - Limits & Differentiation Rules',
+            subject: 'Math 1',
+            type: 'شيت',
+            linkedQuizId: 'q4',
+            notes: 'Limits at infinity, continuity, power rule, chain rule derivatives',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }, {
+            id: 'f5',
+            title: 'Revision 1 - Real Functions, Domain & Range',
+            subject: 'Math 0',
+            type: 'ملخص',
+            linkedQuizId: 'q5',
+            notes: 'Polynomials, rational and radical functions domain and range',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }, {
+            id: 'f6',
+            title: 'Lab 1 - Coulomb Law & Ohm Circuits',
+            subject: 'Physics',
+            type: 'سكشن',
+            linkedQuizId: 'q6',
+            notes: 'Electric charge, Voltage, Current, Resistance V = I * R, series and parallel',
+            url: 'https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/view'
+        }];
+
+        const INITIAL_QUIZZES = [{
+            id: 'q1',
+            linkedFileId: 'f1',
+            title: '🤖 كويز ذكي: Programming 1 - المتغيرات والمعاملات',
+            subject: 'Programming 1',
+            xp: 100,
+            time: 90,
+            aiGenerated: true,
+            questions: [{
+                q: 'ما هو ناتج القسمة الصحيحة (9 / 2) في لغة C++ عندما يكون الرقمان من نوع int؟',
+                options: ['4', '4.5', '5', '1'],
+                correct: 0,
+                exp: 'لأن قسمة عددين صحيحين (int / int) في C++ تهمل الكسر العشري تماماً فيكون الناتج 4.'
+            }, {
+                q: 'أي معامل يُستخدم لحساب باقي القسمة (Modulo) في C++؟',
+                options: ['%', '/', '#', '&'],
+                correct: 0,
+                exp: 'المعامل % يُرجع باقي القسمة الصحيحة، مثلاً 9 % 2 يساوي 1.'
+            }, {
+                q: 'أي جملة تُستخدم لإدخال قيمة من المستخدم في C++؟',
+                options: ['cin >> x;', 'cout << x;', 'input(x);', 'scanf >> x;'],
+                correct: 0,
+                exp: 'الكائن cin مع معامل الاستخراج >> هو المسؤول عن قراءة المدخلات القياسية في C++.'
+            }]
+        }, {
+            id: 'q2',
+            linkedFileId: 'f2',
+            title: '🤖 كويز ذكي: CT - مهارات التفكير الحاسوبي',
+            subject: 'CT',
+            xp: 90,
+            time: 60,
+            aiGenerated: true,
+            questions: [{
+                q: 'تقسيم المشكلة الكبيرة المعقدة إلى مشكلات فرعية أصغر يسهل حلها يُسمى:',
+                options: ['Decomposition (التفكيك)', 'Abstraction (التجريد)', 'Debugging (تصحيح الأخطاء)', 'Compilation (الترجمة)'],
+                correct: 0,
+                exp: 'التفكيك (Decomposition) هو الركيزة الأولى في التفكير الحاسوبي لتجزئة المشاكل المعقدة.'
+            }, {
+                q: 'التركيز على المعلومات المهمة وتجاهل التفاصيل غير الضرورية في المشكلة يُعرف بـ:',
+                options: ['Abstraction (التجريد)', 'Looping (التكرار)', 'Sorting (الترتيب)', 'Flowcharting'],
+                correct: 0,
+                exp: 'التجريد (Abstraction) يساعد على بناء نموذج واضح للمشكلة بحذف التفاصيل الهامشية.'
+            }]
+        }, {
+            id: 'q3',
+            linkedFileId: 'f3',
+            title: '🤖 كويز ذكي: Statistics - مقاييس النزعة المركزية',
+            subject: 'Statistics',
+            xp: 100,
+            time: 60,
+            aiGenerated: true,
+            questions: [{
+                q: 'ما هو الوسيط (Median) للقيم المرتبة التالية: [5, 8, 12, 15, 20]؟',
+                options: ['12', '8', '15', '10'],
+                correct: 0,
+                exp: 'الوسيط هو القيمة التي تتوسط البيانات بعد ترتيبها تصاعدياً أو تنازلياً، وهنا القيمة الثالثة هي 12.'
+            }]
+        }, {
+            id: 'q4',
+            linkedFileId: 'f4',
+            title: '🤖 كويز ذكي: Math 1 - النهايات والاشتقاق',
+            subject: 'Math 1',
+            xp: 100,
+            time: 60,
+            aiGenerated: true,
+            questions: [{
+                q: 'قيمة مشتقة الدالة f(x) = x² + 4x عند النقطة x = 3 تساوي:',
+                options: ['10', '6', '12', '21'],
+                correct: 0,
+                exp: 'مشتقة الدالة هي f\'(x) = 2x + 4، وبالتعويض عن x = 3 نحصل على 2(3) + 4 = 10.'
+            }]
+        }, {
+            id: 'q5',
+            linkedFileId: 'f5',
+            title: '🤖 كويز ذكي: Math 0 - مجال الدوال الحقيقية',
+            subject: 'Math 0',
+            xp: 80,
+            time: 60,
+            aiGenerated: true,
+            questions: [{
+                q: 'مجال الدالة الجذرية f(x) = √(x - 3) في الأعداد الحقيقية هو:',
+                options: ['[3, ∞)', '(-∞, 3]', 'R - {3}', '(0, 3)'],
+                correct: 0,
+                exp: 'يشترط في الجذر التربيعي أن يكون ما تحت الجذر أكبر من أو يساوي الصفر: x - 3 ≥ 0 أي x ≥ 3.'
+            }]
+        }, {
+            id: 'q6',
+            linkedFileId: 'f6',
+            title: '🤖 كويز ذكي: Physics - قانون أوم والدوائر الكهربية',
+            subject: 'Physics',
+            xp: 90,
+            time: 60,
+            aiGenerated: true,
+            questions: [{
+                q: 'إذا كان فرق الجهد V = 24V والمقاومة R = 6Ω فإن شدة التيار الكهربي I تساوي:',
+                options: ['4 A', '144 A', '18 A', '0.25 A'],
+                correct: 0,
+                exp: 'حسب قانون أوم I = V / R، فإن شدة التيار = 24 / 6 = 4 أمبير.'
+            }]
+        }];
+
+        const INITIAL_TASKS = [{
+            id: 't1',
+            title: '💻 تاسك تطبيقي (AI): برنامج حساب التقدير والمتوسط بلغة C++',
+            subject: 'Programming 1',
+            xp: 50,
+            desc: 'اكتب برنامجاً بلغة C++ يطلب من الطالب إدخال درجات 3 مواد، ثم يحسب المتوسط الحسابي باستخدام المتغيرات المناسبة (float/double) ويطبع النتيجة على الشاشة.'
+        }, {
+            id: 't2',
+            title: '🧠 تاسك تطبيقي (AI): رسم خريطة تدفق (Flowchart) لعملية السحب البنكي',
+            subject: 'CT',
+            xp: 50,
+            desc: 'قم بتحليل مشكلة سحب مبلغ من ماكينة الصراف الآلي ATM (قراءة الرصيد، التحقق من أن المبلغ المطلوب أقل من أو يساوي الرصيد، خصم المبلغ، طباعة الرصيد الجديد).'
+        }, {
+            id: 't3',
+            title: '📊 تاسك تطبيقي (AI): حساب المتوسط والانحراف المعياري لعينة درجات',
+            subject: 'Statistics',
+            xp: 50,
+            desc: 'لديك العينة: [10, 12, 14, 16, 18]. احسب الوسط الحسابي (Mean) والتباين (Sample Variance s²) خطوة بخطوة.'
+        }];
+
+        const INITIAL_STUDENTS = [{
+            id: '2026101',
+            name: 'طالب #101',
+            xp: 360,
+            studied: ['f1', 'f2', 'f3'],
+            bookmarks: ['f1'],
+            quizzesDone: ['q1', 'q2'],
+            tasksDone: ['t1']
+        }, {
+            id: '2026108',
+            name: 'طالب #108',
+            xp: 240,
+            studied: ['f1', 'f4'],
+            bookmarks: [],
+            quizzesDone: ['q1'],
+            tasksDone: []
+        }, {
+            id: '2026115',
+            name: 'طالب #115',
+            xp: 185,
+            studied: ['f3'],
+            bookmarks: [],
+            quizzesDone: ['q3'],
+            tasksDone: []
+        }];
+
+        /* --- 4. حالة التطبيق --- */
+        let filesList = [];
+        let quizzesList = [];
+        let tasksList = [];
+        let studentsList = [];
+        let reportsList = [];
+        let platformConfig = {
+            announcement: '📢 تنبيه هام: كويز Programming 1 و Statistics الأسبوع القادم في المحاضرات 1 و 2 — راجع الملفات وحل كويزات الـ AI!',
+            examTitle: 'امتحانات الميدتيرم (Midterm Exams)',
+            examDate: '2026-11-22',
+            notices: [],
+            exams: []
+        };
+
+        let currentUser = null;
+        let currentSubjectFilter = 'all';
+        let currentTypeFilter = 'all';
+        let currentQuizFilter = 'all';
+        let activeViewerFile = null;
+        let activeTaskItem = null;
+
+        // متغيرات الكويز
+        let runningQuiz = null;
+        let runningQIdx = 0;
+        let runningCorrect = 0;
+        let runningUserChoices = [];
+        let runningTimer = null;
+        let runningSec = 0;
+
+        function loadData() {
+            try {
+                filesList = JSON.parse(localStorage.getItem('unidrive_v3_files')) || [...INITIAL_FILES];
+                quizzesList = JSON.parse(localStorage.getItem('unidrive_v3_quizzes')) || [...INITIAL_QUIZZES];
+                tasksList = JSON.parse(localStorage.getItem('unidrive_v3_tasks')) || [...INITIAL_TASKS];
+                const savedStudents = JSON.parse(localStorage.getItem('unidrive_v3_students'));
+                studentsList = Array.isArray(savedStudents) && savedStudents.length ?
+                    savedStudents.filter(s => s && s.id != null).map(s => ({
+                        ...s,
+                        id: String(s.id)
+                    })) : [...INITIAL_STUDENTS];
+                reportsList = JSON.parse(localStorage.getItem('unidrive_v3_reports')) || [];
+                const savedCfg = JSON.parse(localStorage.getItem('unidrive_v3_config'));
+                if (savedCfg) platformConfig = {
+                    ...platformConfig,
+                    ...savedCfg
+                };
+                if (!Array.isArray(platformConfig.notices)) platformConfig.notices = [];
+                if (!Array.isArray(platformConfig.exams)) platformConfig.exams = [];
+            } catch (e) {
+                filesList = [...INITIAL_FILES];
+                quizzesList = [...INITIAL_QUIZZES];
+                tasksList = [...INITIAL_TASKS];
+                studentsList = [...INITIAL_STUDENTS];
+                reportsList = [];
+            }
+            startCountdownTicker();
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem('unidrive_v3_files', JSON.stringify(filesList));
+                localStorage.setItem('unidrive_v3_quizzes', JSON.stringify(quizzesList));
+                localStorage.setItem('unidrive_v3_tasks', JSON.stringify(tasksList));
+                localStorage.setItem('unidrive_v3_students', JSON.stringify(studentsList));
+                localStorage.setItem('unidrive_v3_reports', JSON.stringify(reportsList));
+                localStorage.setItem('unidrive_v3_config', JSON.stringify(platformConfig));
+            } catch (e) {}
+        }
+
+        function notify(text) {
+            const box = document.getElementById('toast-box');
+            const el = document.createElement('div');
+            el.className = 'toast-msg';
+            el.textContent = text;
+            box.appendChild(el);
+            setTimeout(() => el.remove(), 3400);
+        }
+
+        /* --- 5. الإشعارات وجدول الامتحانات --- */
+        function activeNotices() {
+            const now = Date.now();
+            return (platformConfig.notices || []).filter(n => n.enabled !== false &&
+                    (!n.start || new Date(n.start).getTime() <= now) &&
+                    (!n.end || new Date(n.end).getTime() >= now))
+                .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        }
+
+        function renderBroadcasts() {
+            const notices = activeNotices();
+            const noticeHost = document.getElementById('student-announcements-list');
+            const examHost = document.getElementById('student-exams-list');
+            if (noticeHost) noticeHost.innerHTML = notices.length ? notices.map(n => {
+                const color = n.type === 'urgent' ? '#f87171' : n.type === 'important' ? '#fbbf24' : n.type === 'exam' ? '#22d3ee' : '#60a5fa';
+                const label = n.type === 'urgent' ? 'عاجل' : n.type === 'important' ? 'مهم' : n.type === 'exam' ? 'امتحان' : 'إعلان';
+                return `<div class="mini-stat" style="border-right:4px solid ${color}"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong style="font-size:.92rem;margin:0">${escapeHTML(n.title)}</strong><span class="badge" style="color:${color}">${label}</span></div><div style="font-size:.84rem;margin-top:5px;white-space:pre-wrap">${escapeHTML(n.body)}</div></div>`;
+            }).join('') : '<p style="color:var(--text-muted);font-size:.84rem">لا توجد إشعارات منشورة حالياً.</p>';
+
+            const upcoming = (platformConfig.exams || []).filter(e => new Date(e.dateTime).getTime() >= Date.now())
+                .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+            if (examHost) examHost.innerHTML = upcoming.length ? upcoming.map(e => `<div class="mini-stat"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong style="margin:0">${escapeHTML(e.name)}</strong><span class="badge badge-cyan">${escapeHTML(e.subject)}</span></div><div style="font-size:.82rem;color:var(--text-muted);margin-top:5px" dir="ltr">${new Date(e.dateTime).toLocaleString('en-GB')}</div>${e.notes ? `<div style="font-size:.8rem;margin-top:4px">${escapeHTML(e.notes)}</div>` : ''}</div>`).join('') : '<p style="color:var(--text-muted);font-size:.84rem">لا توجد امتحانات قادمة مسجلة حالياً.</p>';
+
+            const adminNotices = document.getElementById('admin-notices-list');
+            if (adminNotices) adminNotices.innerHTML = (platformConfig.notices || []).length ? platformConfig.notices.map(n => `<div class="mini-stat"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>${escapeHTML(n.title)}</strong><span class="badge ${n.enabled === false ? 'badge-red' : 'badge-emerald'}">${n.enabled === false ? 'موقوف' : 'مفعّل'}</span></div><div style="font-size:.82rem;margin:5px 0">${escapeHTML(n.body)}</div><div class="admin-tools-row"><button class="btn btn-secondary btn-sm" onclick="editNotice('${n.id}')">✏️ تعديل</button><button class="btn btn-warning btn-sm" onclick="toggleNotice('${n.id}')">${n.enabled === false ? 'نشر' : 'إيقاف'}</button><button class="btn btn-danger btn-sm" onclick="deleteNotice('${n.id}')">حذف</button></div></div>`).join('') : '<p style="color:var(--text-muted)">لم تضف إشعارات بعد.</p>';
+
+            const adminExams = document.getElementById('admin-exams-list');
+            if (adminExams) adminExams.innerHTML = (platformConfig.exams || []).length ? [...platformConfig.exams].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime)).map(e => `<div class="mini-stat"><strong>${escapeHTML(e.name)} — ${escapeHTML(e.subject)}</strong><div style="font-size:.8rem;color:var(--text-muted);margin:5px 0" dir="ltr">${new Date(e.dateTime).toLocaleString('en-GB')}</div><div class="admin-tools-row"><button class="btn btn-secondary btn-sm" onclick="editExam('${e.id}')">✏️ تعديل</button><button class="btn btn-danger btn-sm" onclick="deleteExam('${e.id}')">حذف</button></div></div>`).join('') : '<p style="color:var(--text-muted)">لم تضف امتحانات بعد.</p>';
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        function requireAdmin() {
+            if (!currentUser || currentUser.role !== 'admin') { notify('هذه الخاصية للمشرف فقط'); return false; }
+            return true;
+        }
+        function saveNotice(e) {
+            e.preventDefault(); if (!requireAdmin()) return;
+            const id = document.getElementById('notice-edit-id').value || `n_${Date.now()}`;
+            const old = (platformConfig.notices || []).find(x => x.id === id);
+            const item = { id, title: document.getElementById('notice-title').value.trim(), body: document.getElementById('notice-body').value.trim(), type: document.getElementById('notice-type').value, start: document.getElementById('notice-start').value, end: document.getElementById('notice-end').value, enabled: old ? old.enabled !== false : true, createdAt: old?.createdAt || Date.now() };
+            if (item.start && item.end && new Date(item.end) <= new Date(item.start)) { notify('❌ وقت الانتهاء يجب أن يكون بعد وقت البداية'); return; }
+            platformConfig.notices = platformConfig.notices || [];
+            const idx = platformConfig.notices.findIndex(x => x.id === id);
+            if (idx >= 0) platformConfig.notices[idx] = item; else platformConfig.notices.unshift(item);
+            saveData(); resetNoticeForm(); renderBroadcasts(); notify('✅ تم حفظ الإشعار');
+        }
+        function editNotice(id) {
+            if (!requireAdmin()) return;
+            const n = platformConfig.notices.find(x => x.id === id); if (!n) return;
+            document.getElementById('notice-edit-id').value = n.id; document.getElementById('notice-title').value = n.title;
+            document.getElementById('notice-body').value = n.body; document.getElementById('notice-type').value = n.type || 'normal';
+            document.getElementById('notice-start').value = n.start || ''; document.getElementById('notice-end').value = n.end || '';
+            document.getElementById('notice-title').focus();
+        }
+        function resetNoticeForm() { document.getElementById('admin-notice-form').reset(); document.getElementById('notice-edit-id').value = ''; }
+        function toggleNotice(id) { if (!requireAdmin()) return; const n = platformConfig.notices.find(x => x.id === id); if (n) { n.enabled = n.enabled === false; saveData(); renderBroadcasts(); } }
+        function deleteNotice(id) { if (!requireAdmin() || !confirm('هل تريد حذف هذا الإشعار؟')) return; platformConfig.notices = platformConfig.notices.filter(x => x.id !== id); saveData(); renderBroadcasts(); notify('تم حذف الإشعار'); }
+
+        function saveExam(e) {
+            e.preventDefault(); if (!requireAdmin()) return;
+            const id = document.getElementById('exam-edit-id').value || `e_${Date.now()}`;
+            const item = { id, name: document.getElementById('exam-name').value.trim(), subject: document.getElementById('exam-subject').value.trim(), dateTime: document.getElementById('exam-datetime').value, notes: document.getElementById('exam-notes').value.trim() };
+            if (!item.dateTime) { notify('حدد تاريخ ووقت الامتحان'); return; }
+            platformConfig.exams = platformConfig.exams || [];
+            const idx = platformConfig.exams.findIndex(x => x.id === id); if (idx >= 0) platformConfig.exams[idx] = item; else platformConfig.exams.push(item);
+            saveData(); resetExamForm(); renderBroadcasts(); updateCountdownDisplay(); notify('✅ تم حفظ موعد الامتحان');
+        }
+        function editExam(id) {
+            if (!requireAdmin()) return; const e = platformConfig.exams.find(x => x.id === id); if (!e) return;
+            document.getElementById('exam-edit-id').value = e.id; document.getElementById('exam-name').value = e.name; document.getElementById('exam-subject').value = e.subject; document.getElementById('exam-datetime').value = e.dateTime; document.getElementById('exam-notes').value = e.notes || ''; document.getElementById('exam-name').focus();
+        }
+        function resetExamForm() { document.getElementById('admin-exam-form').reset(); document.getElementById('exam-edit-id').value = ''; }
+        function deleteExam(id) { if (!requireAdmin() || !confirm('هل تريد حذف موعد الامتحان؟')) return; platformConfig.exams = platformConfig.exams.filter(x => x.id !== id); saveData(); renderBroadcasts(); updateCountdownDisplay(); notify('تم حذف الامتحان'); }
+
+        function updateCountdownDisplay() {
+            const next = (platformConfig.exams || []).filter(e => new Date(e.dateTime).getTime() >= Date.now()).sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))[0];
+            const title = next ? `${next.name} — ${next.subject}` : platformConfig.examTitle;
+            document.getElementById('exam-title-display').textContent = title || 'لا توجد امتحانات قادمة';
+            const target = next ? new Date(next.dateTime).getTime() : (platformConfig.examDate ? new Date(platformConfig.examDate + 'T09:00:00').getTime() : 0);
+            let diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+            const d = Math.floor(diff / 86400); diff %= 86400; const h = Math.floor(diff / 3600); diff %= 3600; const m = Math.floor(diff / 60); const sec = diff % 60;
+            document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(sec).padStart(2, '0');
+        }
+        function startCountdownTicker() {
+            const update = () => { document.getElementById('urgent-announcement-text').textContent = activeNotices()[0]?.body || platformConfig.announcement || 'لا توجد تنبيهات حالياً'; updateCountdownDisplay(); renderBroadcasts(); };
+            update(); setInterval(update, 1000);
+        }
+        function openAnnouncementModal() {
+            if (!requireAdmin()) return;
+            document.getElementById('in-ann-text').value = platformConfig.announcement || '';
+            document.getElementById('in-exam-title').value = platformConfig.examTitle || '';
+            document.getElementById('in-exam-date').value = platformConfig.examDate || '';
+            document.getElementById('modal-announcement').classList.remove('hidden');
+        }
+        function saveAnnouncementSettings(e) {
+            e.preventDefault(); if (!requireAdmin()) return;
+            platformConfig.announcement = document.getElementById('in-ann-text').value.trim();
+            platformConfig.examTitle = document.getElementById('in-exam-title').value.trim();
+            platformConfig.examDate = document.getElementById('in-exam-date').value;
+            saveData(); closeModal('modal-announcement'); renderBroadcasts(); updateCountdownDisplay(); notify('✅ تم تحديث الإعدادات');
+        }
+
+        /* --- 6. الدخول والتسجيل والزوار والأدمن --- */
+        function toggleAuthMode(mode) {
+            const isLogin = mode === 'login';
+            document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+            document.getElementById('form-register').classList.toggle('hidden', isLogin);
+            document.getElementById('tab-login').classList.toggle('active', isLogin);
+            document.getElementById('tab-register').classList.toggle('active', !isLogin);
+        }
+
+        function submitLogin(e) {
+            if (e) e.preventDefault();
+            try {
+                const userField = document.getElementById('login-user');
+                const passField = document.getElementById('login-pass');
+                const userIn = userField.value.trim();
+                const passIn = passField.value.trim();
+
+                if (!userIn || !passIn) {
+                    notify('من فضلك اكتب البريد أو الكود وكلمة المرور أولاً');
+                    (!userIn ? userField : passField).focus();
+                    return;
+                }
+
+                if (userIn.toLowerCase() === ADMIN_EMAIL.toLowerCase() && passIn === ADMIN_PASS) {
+                    currentUser = { id: 'ADMIN', name: 'مشرف المنصة', role: 'admin', xp: 1500, studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] };
+                    enterPlatform('تم الدخول بصلاحية المشرف العام (Admin)');
+                    return;
+                }
+
+                const safeStudents = Array.isArray(studentsList) ? studentsList : [];
+                const found = safeStudents.find(s => String(s?.id ?? s?.code ?? s?.email ?? '').trim().toLowerCase() === userIn.toLowerCase());
+                if (found) {
+                    if (found.pass && found.pass !== passIn) {
+                        notify('⚠️ كلمة المرور غير صحيحة');
+                        return;
+                    }
+                    currentUser = {
+                        ...found,
+                        role: 'student',
+                        studied: found.studied || [],
+                        fileScores: found.fileScores || {},
+                        quizScores: found.quizScores || {},
+                        bookmarks: found.bookmarks || [],
+                        quizzesDone: found.quizzesDone || [],
+                        tasksDone: found.tasksDone || []
+                    };
+                    enterPlatform(`مرحباً بك، ${currentUser.name}`);
+                } else {
+                    notify('ℹ️ هذا الحساب غير مسجل، قم بإنشاء حساب طالب جديد');
+                    toggleAuthMode('register');
+                    document.getElementById('reg-user').value = userIn;
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                notify('حصل خطأ أثناء تسجيل الدخول. حدّث الصفحة وجرب مرة أخرى.');
+            }
+        }
+
+        function submitRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const id = document.getElementById('reg-user').value.trim();
+            const pass = document.getElementById('reg-pass').value;
+
+            if (id.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                notify('⚠️ هذا البريد مخصص للإدارة فقط');
+                return;
+            }
+
+            const newSt = { id, name, pass, role: 'student', xp: 50, studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] };
+            const idx = studentsList.findIndex(s => String(s.id || '').trim().toLowerCase() === id.toLowerCase());
+            if (idx >= 0) studentsList[idx] = newSt;
+            else studentsList.push(newSt);
+
+            saveData();
+            currentUser = newSt;
+            enterPlatform('🎉 تم إنشاء حسابك وحصلت على +50 XP');
+        }
+
+        function startGuestMode() {
+            currentUser = { id: 'GUEST', name: 'زائر', role: 'guest', xp: 0, studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] };
+            enterPlatform('أنت الآن في وضع الزائر (مشاهدة العناوين فقط)');
+        }
+
+        function enterPlatform(msg) {
+            document.getElementById('auth-view').classList.add('hidden');
+            document.getElementById('app-view').classList.remove('hidden');
+
+            const isAdmin = currentUser.role === 'admin';
+            const isGuest = currentUser.role === 'guest';
+
+            document.getElementById('user-name-display').textContent = currentUser.name;
+            document.getElementById('user-xp-display').textContent = currentUser.xp || 0;
+
+            const badge = document.getElementById('role-badge');
+            badge.textContent = isAdmin ? 'مشرف Admin' : (isGuest ? 'زائر' : 'طالب');
+            badge.className = isAdmin ? 'badge badge-amber' : 'badge badge-blue';
+
+            document.getElementById('admin-quick-bar').classList.toggle('hidden', !isAdmin);
+            document.getElementById('edit-announcement-btn').classList.toggle('hidden', !isAdmin);
+            document.getElementById('dnav-admin').classList.toggle('hidden', !isAdmin);
+            document.getElementById('mnav-admin').classList.toggle('hidden', !isAdmin);
+
+            renderAll();
+            renderBroadcasts();
+            showSection('home');
+            notify(msg);
+        }
+
+        function logoutUser() {
+            closeDriveViewer();
+            currentUser = null;
+            document.getElementById('app-view').classList.add('hidden');
+            document.getElementById('auth-view').classList.remove('hidden');
+        }
+
+        function syncStudentRecord() {
+            if (!currentUser || currentUser.role !== 'student') return;
+            const idx = studentsList.findIndex(s => s.id === currentUser.id);
+            if (idx >= 0) studentsList[idx] = { ...currentUser };
+            else studentsList.push({ ...currentUser });
+            saveData();
+            document.getElementById('user-xp-display').textContent = currentUser.xp || 0;
+        }
+
+        function checkStudentPermission(reasonText) {
+            if (!currentUser || currentUser.role === 'guest') {
+                document.getElementById('guest-modal-text').textContent = reasonText;
+                document.getElementById('modal-guest').classList.remove('hidden');
+                return false;
+            }
+            return true;
+        }
+
+        function goToAuthFromGuest(mode) {
+            closeModal('modal-guest');
+            logoutUser();
+            toggleAuthMode(mode);
+        }
+
+        /* --- 7. التنقل بين الأقسام --- */
+        function showSection(sec) {
+            const list = ['home', 'materials', 'bookmarks', 'quizzes', 'leaderboard', 'admin'];
+            list.forEach(s => {
+                const el = document.getElementById(`sec-${s}`);
+                if (el) el.classList.toggle('hidden', s !== sec);
+                const dBtn = document.getElementById(`dnav-${s}`);
+                const mBtn = document.getElementById(`mnav-${s}`);
+                if (dBtn) dBtn.classList.toggle('active', s === sec);
+                if (mBtn) mBtn.classList.toggle('active', s === sec);
+            });
+            if (sec === 'admin' && (!currentUser || currentUser.role !== 'admin')) {
+                sec = 'home';
+                document.getElementById('sec-admin').classList.add('hidden');
+                document.getElementById('sec-home').classList.remove('hidden');
+            }
+        }
+
+        /* --- 8. محرك الذكاء الاصطناعي (Gemini API + Smart Fallback) لتوليد الكويز و/أو التاسك --- */
+        async function generateAIQuizAndTaskForLecture(fileObj, options = { includeQuiz: true, includeTask: true }) {
+            notify(options.includeTask
+                ? '🤖 جاري إعداد كويز وتاسك من عنوان المحاضرة والملاحظات التي أدخلها المشرف...'
+                : '🤖 جاري إعداد كويز من عنوان المحاضرة والملاحظات التي أدخلها المشرف...');
+
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const systemPrompt = `أنت أستاذ جامعي خبير في كلية الحاسبات والذكاء الاصطناعي. اعتمد فقط على عنوان المحاضرة والملاحظات النصية المتاحة، ولا تدّعِ الاطلاع على ملف Drive نفسه. قم بإنشاء كويز تفاعلي مكون من 3 أسئلة اختيار من متعدد باللغة العربية (مع المصطلحات الإنجليزية العلمية) وتاسك تطبيقي عملي بناءً على بيانات المحاضرة المرفقة. يجب أن يتضمن كل سؤال 4 اختيارات، بحيث يكون الاختيار الأول دائماً هو الإجابة الصحيحة، مع كتابة تفسير علمي واضح للإجابة الصحيحة.`;
+
+            const userQuery = `المادة: ${fileObj.subject}
+عنوان المحاضرة: ${fileObj.title}
+ملاحظات ومحتوى المحاضرة: ${fileObj.notes || fileObj.title}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            quizTitle: { type: "STRING" },
+                            questions: {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        q: { type: "STRING" },
+                                        correctOption: { type: "STRING" },
+                                        wrongOption1: { type: "STRING" },
+                                        wrongOption2: { type: "STRING" },
+                                        wrongOption3: { type: "STRING" },
+                                        explanation: { type: "STRING" }
+                                    },
+                                    required: ["q", "correctOption", "wrongOption1", "wrongOption2", "wrongOption3", "explanation"]
+                                }
+                            },
+                            taskTitle: { type: "STRING" },
+                            taskDescription: { type: "STRING" }
+                        },
+                        required: ["quizTitle", "questions", "taskTitle", "taskDescription"]
+                    }
+                }
+            };
+
+            let aiResult = null;
+
+            try {
+                let delay = 1000;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    const res = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const rawJson = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (rawJson) {
+                            aiResult = JSON.parse(rawJson);
+                            break;
+                        }
+                    }
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            } catch (err) {
+                // Fallback handled cleanly below
+            }
+
+            if (!aiResult || !aiResult.questions || !aiResult.questions.length) {
+                aiResult = buildSmartAcademicFallback(fileObj);
+            }
+
+            let createdQuiz = null;
+            if (options.includeQuiz) {
+                createdQuiz = {
+                    id: 'q-ai-' + Date.now(),
+                    linkedFileId: fileObj.id,
+                    title: `🤖 ${aiResult.quizTitle || ('كويز محاضرة: ' + fileObj.title)}`,
+                    subject: fileObj.subject,
+                    xp: 90,
+                    time: 90,
+                    aiGenerated: true,
+                    questions: aiResult.questions.map(item => ({
+                        q: item.q,
+                        options: [item.correctOption, item.wrongOption1, item.wrongOption2, item.wrongOption3],
+                        correct: 0,
+                        exp: item.explanation
+                    }))
+                };
+                fileObj.linkedQuizId = createdQuiz.id;
+                quizzesList.unshift(createdQuiz);
+            }
+
+            if (options.includeTask) {
+                const newTask = {
+                    id: 't-ai-' + Date.now(),
+                    linkedFileId: fileObj.id,
+                    title: `💻 ${aiResult.taskTitle || ('تاسك تطبيقي AI: ' + fileObj.title)}`,
+                    subject: fileObj.subject,
+                    xp: 50,
+                    desc: aiResult.taskDescription
+                };
+                tasksList.unshift(newTask);
+            }
+
+            saveData();
+            renderAll();
+            notify(options.includeTask
+                ? '✨ تم توليد ونشر كويز المحاضرة + التاسك التطبيقي بالـ AI!'
+                : '✨ تم توليد ونشر كويز المحاضرة فقط (بدون تاسك) بنجاح!');
+            return createdQuiz;
+        }
+
+        function buildSmartAcademicFallback(fileObj) {
+            const sub = fileObj.subject;
+            const title = fileObj.title;
+            return {
+                quizTitle: `كويز ذكي: ${title}`,
+                questions: [
+                    {
+                        q: `في محاضرة (${title}) بمادة ${sub}، ما هو الهدف الأساسي من تطبيق المفاهيم المشروحة؟`,
+                        correctOption: 'تحليل المشكلة علمياً والوصول للحل الأدق بأقل خطوات',
+                        wrongOption1: 'زيادة تعقيد العمليات الحسابية بدون شروط',
+                        wrongOption2: 'تجاهل القواعد الأساسية للمادة',
+                        wrongOption3: 'استخدام متغيرات عشوائية غير معرفة',
+                        explanation: `المفاهيم المشروحة في (${title}) تهدف لبناء خطوات منهجية سليمة وتجنب الأخطاء الشائعة.`
+                    },
+                    {
+                        q: `عند مراجعة تطبيقات (${title})، أي خطوة يجب البدء بها قبل تنفيذ الحل النهائي؟`,
+                        correctOption: 'تحديد المعطيات (Inputs) والمطلوب والقانون أو الخوارزمية المناسبة',
+                        wrongOption1: 'كتابة الناتج النهائي مباشرة بالتخمين',
+                        wrongOption2: 'حذف شروط التوقف أو القيود الرياضية',
+                        wrongOption3: 'تبديل المعاملات الأساسية بعكس وظيفتها',
+                        explanation: 'تحديد المدخلات والمخرجات والقانون الحاكم هو الأساس الأول للحل الصحيح.'
+                    },
+                    {
+                        q: `كيف يمكن التحقق من صحة الناتج بعد تطبيق قواعد (${title})؟`,
+                        correctOption: 'باختبار الحل على حالات قياسية (Test Cases) والتأكد من مطابقته للقواعد',
+                        wrongOption1: 'عدم مراجعة الخطوات مطلقاً',
+                        wrongOption2: 'قسمة الناتج على صفر للتأكد',
+                        wrongOption3: 'تجاهل وحدات القياس أو أنواع البيانات',
+                        explanation: 'التحقق عبر حالات اختبار (Test Cases) يضمن خلو الحل من الأخطاء المنطقية والرياضية.'
+                    }
+                ],
+                taskTitle: `تاسك تطبيقي: ${title}`,
+                taskDescription: `قم بمراجعة ملف (${title}) في مادة ${sub}، ولخص أهم 3 قوانين أو مفاهيم أساسية وردت في المحاضرة مع كتابة مثال تطبيقي محلول بخطواتك الخاصة.`
+            };
+        }
+
+        function triggerAIForExistingFile(fileId, withTask = true) {
+            const f = filesList.find(item => item.id === fileId);
+            if (!f) return;
+            generateAIQuizAndTaskForLecture(f, { includeQuiz: true, includeTask: withTask });
+        }
+
+        /* --- 9. المفضلة (Bookmarks ⭐) والإبلاغ عن عطل بالرابط --- */
+        function toggleBookmark(fileId) {
+            if (!checkStudentPermission('سجل دخولك بحساب طالب لحفظ المحاضرات في قائمتك المفضلة للمراجعة.')) return;
+            const bms = currentUser.bookmarks || [];
+            const idx = bms.indexOf(fileId);
+            if (idx >= 0) {
+                bms.splice(idx, 1);
+                notify('تمت إزالة الملف من المحفوظات');
+            } else {
+                bms.push(fileId);
+                notify('⭐ تم حفظ الملف في "ملفاتي المحفوظة" للمراجعة!');
+            }
+            currentUser.bookmarks = bms;
+            syncStudentRecord();
+            renderAll();
+        }
+
+        function reportBrokenLink(fileId) {
+            if (!checkStudentPermission('يرجى تسجيل الدخول كطالب للإبلاغ عن عطل في الرابط.')) return;
+            const file = filesList.find(f => f.id === fileId);
+            if (!file) return;
+
+            const already = reportsList.find(r => r.fileId === fileId);
+            if (!already) {
+                reportsList.unshift({
+                    id: 'rep-' + Date.now(),
+                    fileId: file.id,
+                    fileTitle: file.title,
+                    subject: file.subject,
+                    reporter: currentUser.name,
+                    time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+                });
+                saveData();
+                renderAll();
+            }
+            notify('⚠️ تم إرسال بلاغ لمشرف المنصة لفحص وتحديث رابط الملف فوراً!');
+        }
+
+        function resolveReport(repId) {
+            reportsList = reportsList.filter(r => r.id !== repId);
+            saveData();
+            renderAll();
+            notify('✅ تم إغلاق البلاغ');
+        }
+
+        /* --- 10. عارض ملفات Google Drive النظيف والمريح داخل الموقع --- */
+        function extractDriveFileId(url) {
+            if (!url) return null;
+            const patterns = [
+                /\/file\/d\/([a-zA-Z0-9_-]+)/,
+                /\/presentation\/d\/([a-zA-Z0-9_-]+)/,
+                /\/document\/d\/([a-zA-Z0-9_-]+)/,
+                /[?&]id=([a-zA-Z0-9_-]+)/
+            ];
+            for (const p of patterns) {
+                const match = url.match(p);
+                if (match && match[1]) return match[1];
+            }
+            return null;
+        }
+
+        function buildEmbedPreviewUrl(url) {
+            const id = extractDriveFileId(url);
+            if (!id) return url;
+            if (url.includes('/presentation/d/')) return `https://docs.google.com/presentation/d/${id}/embed`;
+            if (url.includes('/document/d/')) return `https://docs.google.com/document/d/${id}/preview`;
+            return `https://drive.google.com/file/d/${id}/preview`;
+        }
+
+        function buildDirectDownloadUrl(url) {
+            const id = extractDriveFileId(url);
+            if (id) return `https://drive.google.com/uc?export=download&id=${id}`;
+            return url;
+        }
+
+        function openFileInSite(fileId) {
+            if (!checkStudentPermission('لا يمكن للزوار فتح ومعاينة ملفات المحاضرات. يرجى تسجيل الدخول بحساب طالب أولاً.')) return;
+
+            const file = filesList.find(f => f.id === fileId);
+            if (!file) return;
+
+            activeViewerFile = file;
+            document.getElementById('viewer-course-badge').textContent = file.subject;
+            document.getElementById('viewer-file-title').textContent = file.title;
+
+            updateViewerStudiedButton();
+
+            const iframe = document.getElementById('drive-preview-iframe');
+            iframe.src = buildEmbedPreviewUrl(file.url);
+
+            document.getElementById('drive-viewer-modal').classList.remove('hidden');
+        }
+
+        function closeDriveViewer() {
+            const modal = document.getElementById('drive-viewer-modal');
+            const box = document.getElementById('drive-viewer-box');
+            const iframe = document.getElementById('drive-preview-iframe');
+            iframe.src = 'about:blank';
+            box.classList.remove('fullscreen-mode');
+            modal.classList.add('hidden');
+        }
+
+        function toggleViewerFullscreen() {
+            document.getElementById('drive-viewer-box').classList.toggle('fullscreen-mode');
+        }
+
+        function downloadFileDirect(fileId) {
+            if (!checkStudentPermission('لا يمكن للزوار تحميل ملفات المحاضرات. سجل دخولك كطالب لتنزيل الملف فوراً.')) return;
+            const file = filesList.find(f => f.id === fileId);
+            if (!file) return;
+
+            const dlUrl = buildDirectDownloadUrl(file.url);
+            document.getElementById('direct-download-iframe').src = dlUrl;
+            notify('⬇️ جاري تحميل الملف مباشرة داخل المتصفح...');
+        }
+
+        function downloadCurrentViewerFile() {
+            if (!activeViewerFile) return;
+            downloadFileDirect(activeViewerFile.id);
+        }
+
+        function updateViewerStudiedButton() {
+            if (!activeViewerFile || !currentUser) return;
+            const done = (currentUser.studied || []).includes(activeViewerFile.id);
+            const scoreInfo = (currentUser.fileScores || {})[activeViewerFile.id];
+            const btn = document.getElementById('viewer-studied-btn');
+
+            if (done && scoreInfo) {
+                btn.className = 'btn btn-success btn-sm';
+                btn.textContent = `✅ اجتزت الامتحان (${scoreInfo.pct}% • +${scoreInfo.xp} XP)`;
+            } else {
+                btn.className = 'btn btn-warning btn-sm';
+                btn.textContent = '🎯 احصل على نقاط المذاكرة (امتحن أولاً)';
+            }
+        }
+
+        function handleLectureXPRequestFromViewer() {
+            if (!activeViewerFile) return;
+            requestLectureXPByExam(activeViewerFile.id);
+        }
+
+        function findOrCreateQuizForFile(fileObj) {
+            // 1. البحث عن كويز مرتبط مباشرة بالمحاضرة
+            let quiz = quizzesList.find(q => q.id === fileObj.linkedQuizId || q.linkedFileId === fileObj.id);
+            if (quiz) return quiz;
+
+            // 2. إذا كان الملف مرفوعاً "ملف فقط بدون كويز أو تاسك"، ننشئ كويز تحقق فوري خاص بالمحاضرة عند طلب النقاط
+            const fallback = buildSmartAcademicFallback(fileObj);
+            quiz = {
+                id: 'q-verify-' + fileObj.id,
+                linkedFileId: fileObj.id,
+                title: `🎯 اختبار التحقق من مذاكرة: ${fileObj.title}`,
+                subject: fileObj.subject,
+                xp: 90,
+                time: 90,
+                aiGenerated: true,
+                questions: fallback.questions.map(item => ({
+                    q: item.q,
+                    options: [item.correctOption, item.wrongOption1, item.wrongOption2, item.wrongOption3],
+                    correct: 0,
+                    exp: item.explanation
+                }))
+            };
+            fileObj.linkedQuizId = quiz.id;
+            quizzesList.unshift(quiz);
+            saveData();
+            return quiz;
+        }
+
+        function requestLectureXPByExam(fileId) {
+            if (!checkStudentPermission('سجل دخولك كطالب لخوض اختبار المحاضرة وكسب نقاط المذاكرة XP.')) return;
+            const fileObj = filesList.find(f => f.id === fileId);
+            if (!fileObj) return;
+
+            const done = (currentUser.studied || []).includes(fileId);
+            const scoreInfo = (currentUser.fileScores || {})[fileId];
+
+            const gateModal = document.getElementById('modal-exam-gate');
+            const gateText = document.getElementById('exam-gate-text');
+            const startBtn = document.getElementById('exam-gate-start-btn');
+
+            if (done && scoreInfo) {
+                gateText.innerHTML = `لقد امتحنت في محاضرة <strong>(${fileObj.title})</strong> سابقاً وحصلت على درجة <strong>${scoreInfo.pct}% (${scoreInfo.xp} XP)</strong>.<br>هل ترغب في إعادة الاختبار لتحسين درجتك ورفع نقاطك إلى الدرجة النهائية؟`;
+                startBtn.textContent = '🔄 إعادة الاختبار لتحسين الدرجة والنقاط';
+            } else {
+                gateText.innerHTML = `⚠️ <strong>لا تُمنح نقاط مذاكرة المحاضرة إلا بعد الامتحان!</strong><br>للحصول على نقاط <strong>(${fileObj.title})</strong>، قم بحل الاختبار القصير الآن وستحصل على النقاط (XP) تناسبياً حسب درجتك الفعلية.`;
+                startBtn.textContent = '🚀 ابدأ امتحان المحاضرة الآن';
+            }
+
+            startBtn.onclick = () => {
+                closeModal('modal-exam-gate');
+                closeDriveViewer();
+                const targetQuiz = findOrCreateQuizForFile(fileObj);
+                startQuiz(targetQuiz.id, fileObj.id);
+            };
+
+            gateModal.classList.remove('hidden');
+        }
+
+        /* --- 11. رسم الواجهات والبطاقات --- */
+        function renderAll() {
+            if (!currentUser) return;
+            document.getElementById('nav-bm-count').textContent = (currentUser.bookmarks || []).length;
+            document.getElementById('admin-reports-badge').textContent = reportsList.length;
+
+            renderHome();
+            renderMaterials();
+            renderBookmarks();
+            renderQuizzesAndTasks();
+            renderLeaderboard();
+            if (currentUser.role === 'admin') renderAdminLists();
+        }
+
+        function renderHome() {
+            document.getElementById('stat-files-count').textContent = filesList.length;
+            document.getElementById('stat-quizzes-count').textContent = quizzesList.length + tasksList.length;
+            document.getElementById('stat-xp-count').textContent = currentUser.xp || 0;
+
+            const studiedCount = (currentUser.studied || []).length;
+            const quizCount = (currentUser.quizzesDone || []).length;
+            const taskCount = (currentUser.tasksDone || []).length;
+            const totalWork = filesList.length + quizzesList.length + tasksList.length;
+            const completedWork = Math.min(totalWork, studiedCount + quizCount + taskCount);
+            const progressPct = totalWork ? Math.round((completedWork / totalWork) * 100) : 0;
+            document.getElementById('progress-studied').textContent = studiedCount;
+            document.getElementById('progress-quizzes').textContent = quizCount;
+            document.getElementById('progress-tasks').textContent = taskCount;
+            document.getElementById('progress-percent').textContent = `${progressPct}% إنجاز`;
+            document.getElementById('progress-fill').style.width = `${progressPct}%`;
+
+            const cGrid = document.getElementById('courses-grid');
+            cGrid.innerHTML = COURSES.map(c => {
+                const fCount = filesList.filter(f => f.subject === c.id).length;
+                const qCount = quizzesList.filter(q => q.subject === c.id).length;
+                return `
+                    <div class="card" style="padding: 18px; cursor: pointer; display: flex; flex-direction: column; gap: 10px;" onclick="filterByCourse('${c.id}')">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-size: 1.8rem;">${c.icon}</span>
+                            <div style="display: flex; gap: 5px;">
+                                <span class="badge badge-cyan">${fCount} ملفات</span>
+                                <span class="badge badge-purple">${qCount} كويز</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.08rem; font-weight: 900; direction: ltr; text-align: right;">${c.name}</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted);">${c.desc}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const rGrid = document.getElementById('recent-materials-grid');
+            rGrid.innerHTML = filesList.slice(0, 3).map(f => createFileCardHTML(f)).join('');
+        }
+
+        function createFileCardHTML(f) {
+            const isGuest = currentUser && currentUser.role === 'guest';
+            const isAdmin = currentUser && currentUser.role === 'admin';
+            const done = currentUser && (currentUser.studied || []).includes(f.id);
+            const scoreInfo = currentUser && currentUser.fileScores ? currentUser.fileScores[f.id] : null;
+            const saved = currentUser && (currentUser.bookmarks || []).includes(f.id);
+
+            return `
+                <div class="card" style="padding: 17px; display: flex; flex-direction: column; justify-content: space-between; gap: 13px;">
+                    <div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 6px;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span class="badge badge-blue">${f.type}</span>
+                                <span class="badge badge-cyan" style="direction: ltr;">${f.subject}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <button onclick="toggleBookmark('${f.id}')" class="btn ${saved ? 'btn-warning' : 'btn-secondary'} btn-sm" title="حفظ في المفضلة للمراجعة">
+                                    ${saved ? '⭐ محفوظ' : '☆ حفظ'}
+                                </button>
+                                ${isAdmin ? `<button onclick="deleteFile('${f.id}')" class="btn btn-danger btn-sm" title="حذف">🗑️</button>` : ''}
+                            </div>
+                        </div>
+                        <h3 style="font-size: 0.96rem; font-weight: 800; line-height: 1.45;">${f.title}</h3>
+                        ${f.notes ? `<p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">📌 ${f.notes}</p>` : ''}
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 7px; border-top: 1px solid var(--border-color); padding-top: 11px;">
+                        <div style="display: flex; gap: 7px;">
+                            <button onclick="openFileInSite('${f.id}')" class="btn btn-primary btn-sm" style="flex: 1;">
+                                ${isGuest ? '🔒' : '👁️'} فتح الملف بالموقع
+                            </button>
+                            <button onclick="downloadFileDirect('${f.id}')" class="btn btn-secondary btn-sm">
+                                ${isGuest ? '🔒' : '⬇️'} تحميل
+                            </button>
+                        </div>
+
+                        <div style="display: flex; gap: 6px;">
+                            <button onclick="requestLectureXPByExam('${f.id}')" class="btn ${done ? 'btn-success' : 'btn-warning'} btn-sm" style="flex: 1;">
+                                ${done && scoreInfo
+                    ? `✅ تم الاجتياز (${scoreInfo.pct}% • +${scoreInfo.xp} XP)`
+                    : '🎯 نقاط المذاكرة (امتحن أولاً)'}
+                            </button>
+                            <button onclick="reportBrokenLink('${f.id}')" class="btn btn-secondary btn-sm" title="الإبلاغ عن رابط لا يعمل" style="color: #f87171;">
+                                ⚠️ إبلاغ
+                            </button>
+                        </div>
+
+                        ${isAdmin ? `
+                            <div style="display: flex; gap: 6px;">
+                                <button onclick="triggerAIForExistingFile('${f.id}', true)" class="btn btn-ai btn-sm" style="flex: 1;" title="توليد كويز + تاسك">
+                                    🤖 كويز + تاسك AI
+                                </button>
+                                <button onclick="triggerAIForExistingFile('${f.id}', false)" class="btn btn-secondary btn-sm" style="flex: 1;" title="توليد كويز فقط بدون تاسك">
+                                    🧠 كويز فقط
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMaterials() {
+            const subPills = [{ id: 'all', name: 'كل المواد (6)' }, ...COURSES];
+            document.getElementById('subject-filter-pills').innerHTML = subPills.map(p => `
+                <button class="pill-btn ${currentSubjectFilter === p.id ? 'active' : ''}" onclick="currentSubjectFilter='${p.id}'; renderMaterials();">
+                    ${p.name}
+                </button>
+            `).join('');
+
+            document.getElementById('type-filter-pills').innerHTML = FILE_TYPES.map(t => `
+                <button class="pill-btn ${currentTypeFilter === t.id ? 'active' : ''}" onclick="currentTypeFilter='${t.id}'; renderMaterials();">
+                    ${t.name}
+                </button>
+            `).join('');
+
+            const q = (document.getElementById('search-input').value || '').trim().toLowerCase();
+            const filtered = filesList.filter(f => {
+                const matchSub = currentSubjectFilter === 'all' || f.subject === currentSubjectFilter;
+                const matchType = currentTypeFilter === 'all' || f.type === currentTypeFilter;
+                const matchQ = !q || String(f.title || '').toLowerCase().includes(q) || String(f.subject || '').toLowerCase().includes(q) || String(f.notes || '').toLowerCase().includes(q);
+                return matchSub && matchType && matchQ;
+            });
+
+            const grid = document.getElementById('all-materials-grid');
+            grid.innerHTML = filtered.length
+                ? filtered.map(f => createFileCardHTML(f)).join('')
+                : `<div class="card" style="grid-column: 1/-1; padding: 28px; text-align: center; color: var(--text-muted);">لا توجد ملفات مطابقة لهذا التصنيف حالياً.</div>`;
+        }
+
+        function renderBookmarks() {
+            const bms = (currentUser && currentUser.bookmarks) || [];
+            const savedFiles = filesList.filter(f => bms.includes(f.id));
+            const grid = document.getElementById('bookmarks-materials-grid');
+            grid.innerHTML = savedFiles.length
+                ? savedFiles.map(f => createFileCardHTML(f)).join('')
+                : `<div class="card" style="grid-column: 1/-1; padding: 30px; text-align: center; color: var(--text-muted);">لم تقم بحفظ أي محاضرات في المفضلة بعد. اضغط على زر (☆ حفظ) بجانب أي محاضرة للرجوع إليها هنا.</div>`;
+        }
+
+        /* --- 12. الكويزات (مع تفسير الإجابات) والتاسكات --- */
+        function renderQuizzesAndTasks() {
+            const isGuest = currentUser && currentUser.role === 'guest';
+            const isAdmin = currentUser && currentUser.role === 'admin';
+
+            const pills = [{ id: 'all', name: 'كل المواد' }, ...COURSES];
+            document.getElementById('quiz-filter-pills').innerHTML = pills.map(p => `
+                <button class="pill-btn ${currentQuizFilter === p.id ? 'active' : ''}" onclick="currentQuizFilter='${p.id}'; renderQuizzesAndTasks();">
+                    ${p.name}
+                </button>
+            `).join('');
+
+            const filteredQ = quizzesList.filter(q => currentQuizFilter === 'all' || q.subject === currentQuizFilter);
+            document.getElementById('all-quizzes-grid').innerHTML = filteredQ.map(q => {
+                const done = currentUser && (currentUser.quizzesDone || []).includes(q.id);
+                const prevScore = currentUser && currentUser.quizScores ? currentUser.quizScores[q.id] : null;
+                return `
+                    <div class="card" style="padding: 17px; display: flex; flex-direction: column; justify-content: space-between; gap: 13px;">
+                        <div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <span class="badge badge-cyan" style="direction: ltr;">${q.subject}</span>
+                                <div style="display: flex; gap: 5px;">
+                                    ${q.aiGenerated ? `<span class="badge badge-purple">🤖 AI</span>` : ''}
+                                    <span class="badge badge-amber">⚡ حتى +${q.xp} XP</span>
+                                    ${isAdmin ? `<button onclick="deleteQuiz('${q.id}')" class="btn btn-danger btn-sm">🗑️</button>` : ''}
+                                </div>
+                            </div>
+                            <h3 style="font-size: 0.96rem; font-weight: 800;">${q.title}</h3>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 11px;">
+                            <span style="font-size: 0.76rem; color: ${done ? '#34d399' : 'var(--text-muted)'}; font-weight: 700;">
+                                ${done && prevScore ? `✅ درجتك: ${prevScore.pct}% (+${prevScore.xp} XP)` : `📝 ${q.questions.length} أسئلة (النقاط حسب الدرجة)`}
+                            </span>
+                            <button onclick="startQuiz('${q.id}')" class="btn btn-primary btn-sm">
+                                ${isGuest ? '🔒 ابدأ الكويز' : (done ? '🔄 حسّن درجتك' : '🚀 ابدأ الكويز')}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const filteredT = tasksList.filter(t => currentQuizFilter === 'all' || t.subject === currentQuizFilter);
+            document.getElementById('all-tasks-grid').innerHTML = filteredT.map(t => {
+                const done = currentUser && (currentUser.tasksDone || []).includes(t.id);
+                return `
+                    <div class="card" style="padding: 17px; display: flex; flex-direction: column; justify-content: space-between; gap: 13px;">
+                        <div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <span class="badge badge-purple" style="direction: ltr;">${t.subject} • Task</span>
+                                <div style="display: flex; gap: 5px;">
+                                    <span class="badge badge-emerald">⚡ +${t.xp} XP</span>
+                                    ${isAdmin ? `<button onclick="deleteTask('${t.id}')" class="btn btn-danger btn-sm">🗑️</button>` : ''}
+                                </div>
+                            </div>
+                            <h3 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 6px;">${t.title}</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">${t.desc}</p>
+                        </div>
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 11px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.76rem; color: ${done ? '#34d399' : 'var(--text-muted)'}; font-weight: 700;">
+                                ${done ? '✅ تم تسليم التاسك' : '⏳ بانتظار الحل'}
+                            </span>
+                            <button onclick="openTaskModal('${t.id}')" class="btn ${done ? 'btn-success' : 'btn-ai'} btn-sm">
+                                ${isGuest ? '🔒 فتح التاسك' : (done ? '✅ عرض التسليم' : '💻 حل وتسليم التاسك')}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        let runningLinkedFileId = null;
+
+        function startQuiz(quizId, explicitFileId = null) {
+            if (!checkStudentPermission('لا يُسمح للزوار بدخول الاختبارات. سجل دخولك بحساب طالب لخوض المسابقة.')) return;
+            const quiz = quizzesList.find(q => q.id === quizId);
+            if (!quiz) return;
+
+            runningQuiz = quiz;
+            runningLinkedFileId = explicitFileId || quiz.linkedFileId || null;
+            runningQIdx = 0;
+            runningCorrect = 0;
+            runningUserChoices = [];
+            runningSec = quiz.time || 90;
+
+            document.getElementById('qmodal-subject').textContent = quiz.subject;
+            document.getElementById('qmodal-title').textContent = quiz.title;
+            document.getElementById('qmodal-body').classList.remove('hidden');
+            document.getElementById('qmodal-result').classList.add('hidden');
+            document.getElementById('modal-quiz').classList.remove('hidden');
+
+            renderQuizQuestion();
+            clearInterval(runningTimer);
+            updateQuizTimerDisplay();
+            runningTimer = setInterval(() => {
+                runningSec--;
+                updateQuizTimerDisplay();
+                if (runningSec <= 0) finishQuiz();
+            }, 1000);
+        }
+
+        function updateQuizTimerDisplay() {
+            const m = String(Math.floor(runningSec / 60)).padStart(2, '0');
+            const s = String(runningSec % 60).padStart(2, '0');
+            document.getElementById('qmodal-timer').textContent = `${m}:${s}`;
+        }
+
+        function renderQuizQuestion() {
+            const item = runningQuiz.questions[runningQIdx];
+            document.getElementById('qmodal-step').textContent = `السؤال ${runningQIdx + 1} من ${runningQuiz.questions.length}`;
+            document.getElementById('qmodal-question').textContent = item.q;
+
+            const opts = item.options.map((t, i) => ({ t, ok: i === item.correct })).sort(() => Math.random() - 0.5);
+            document.getElementById('qmodal-options').innerHTML = opts.map((o, idx) => `
+                <button id="qopt-${idx}" class="btn btn-secondary" style="justify-content: space-between; width: 100%; padding: 12px 14px; text-align: right;">
+                    <span style="white-space: normal;">${o.t}</span>
+                    <span>⬅</span>
+                </button>
+            `).join('');
+
+            opts.forEach((o, idx) => {
+                document.getElementById(`qopt-${idx}`).onclick = () => answerQuiz(o.ok, o.t);
+            });
+        }
+
+        function answerQuiz(isOk, chosenText) {
+            if (isOk) runningCorrect++;
+            runningUserChoices.push({ isOk, chosenText });
+            runningQIdx++;
+            if (runningQIdx < runningQuiz.questions.length) renderQuizQuestion();
+            else finishQuiz();
+        }
+
+        function finishQuiz() {
+            clearInterval(runningTimer);
+            document.getElementById('qmodal-body').classList.add('hidden');
+            document.getElementById('qmodal-result').classList.remove('hidden');
+
+            const total = runningQuiz.questions.length;
+            const pct = Math.round((runningCorrect / total) * 100);
+            // حساب النقاط بناءً على درجة الطالب الفعلية + بونص 15 XP عند الدرجة النهائية 100%
+            let earned = Math.round(runningQuiz.xp * (runningCorrect / total));
+            if (runningCorrect === total && total > 0) {
+                earned += 15; // مكافأة تقفيل امتحان المحاضرة 100%
+            }
+
+            document.getElementById('qmodal-score-text').textContent = `أجبت إجابة صحيحة على ${runningCorrect} من ${total} (نسبة التحصيل: ${pct}%)`;
+
+            if (!currentUser.quizScores) currentUser.quizScores = {};
+            if (!currentUser.fileScores) currentUser.fileScores = {};
+            if (!currentUser.studied) currentUser.studied = [];
+            if (!currentUser.quizzesDone) currentUser.quizzesDone = [];
+
+            const prevQuizRecord = currentUser.quizScores[runningQuiz.id];
+            const prevXP = prevQuizRecord ? prevQuizRecord.xp : 0;
+
+            if (earned === 0) {
+                document.getElementById('qmodal-xp-earned').className = 'badge badge-red';
+                document.getElementById('qmodal-xp-earned').textContent = `⚠️ درجتك 0% — لم تحصل على نقاط، راجع المحاضرة وحاول مجدداً!`;
+            } else if (earned > prevXP) {
+                const diffXP = earned - prevXP;
+                currentUser.xp = (currentUser.xp || 0) + diffXP;
+                currentUser.quizScores[runningQuiz.id] = { pct, xp: earned };
+
+                if (!currentUser.quizzesDone.includes(runningQuiz.id)) {
+                    currentUser.quizzesDone.push(runningQuiz.id);
+                }
+
+                // ربط النقاط والاجتياز بملف المحاضرة المرتبط
+                const targetFileId = runningLinkedFileId || runningQuiz.linkedFileId;
+                if (targetFileId) {
+                    currentUser.fileScores[targetFileId] = { pct, xp: earned };
+                    if (!currentUser.studied.includes(targetFileId)) {
+                        currentUser.studied.push(targetFileId);
+                    }
+                }
+
+                syncStudentRecord();
+                renderAll();
+                updateViewerStudiedButton();
+
+                document.getElementById('qmodal-xp-earned').className = 'badge badge-emerald';
+                document.getElementById('qmodal-xp-earned').textContent = prevXP > 0
+                    ? `🎉 حسّنت درجتك إلى ${pct}%! أُضيف لرصيدك +${diffXP} XP (الإجمالي: ${earned} XP)`
+                    : `🎉 اجتزت الاختبار بدرجة ${pct}% وحصلت على +${earned} XP!`;
+            } else {
+                document.getElementById('qmodal-xp-earned').className = 'badge badge-cyan';
+                document.getElementById('qmodal-xp-earned').textContent = `النتيجة: ${pct}% (تم احتساب أعلى درجة سابقة لك: +${prevXP} XP)`;
+            }
+
+            // عرض تفسير الإجابات بالتفصيل
+            const expContainer = document.getElementById('qmodal-explanations-list');
+            expContainer.innerHTML = runningQuiz.questions.map((qItem, i) => {
+                const userChoice = runningUserChoices[i];
+                const isCorrect = userChoice && userChoice.isOk;
+                const correctText = qItem.options[qItem.correct];
+                return `
+                    <div class="explanation-card" style="border-right: 4px solid ${isCorrect ? '#10b981' : '#ef4444'};">
+                        <div style="font-weight: 800; margin-bottom: 4px;">${i + 1}. ${qItem.q}</div>
+                        <div style="font-size: 0.78rem; color: ${isCorrect ? '#34d399' : '#f87171'};">
+                            ${isCorrect ? '✅ إجابتك صحيحة: ' : `❌ إجابتك: (${userChoice ? userChoice.chosenText : 'لم تجب'}) — الصحيحة: `}
+                            <strong>${correctText}</strong>
+                        </div>
+                        <div style="font-size: 0.78rem; color: #cbd5e1; margin-top: 4px;">
+                            💡 <strong>التفسير:</strong> ${qItem.exp || 'تطبيق مباشر للقانون المشروح في المحاضرة.'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function closeQuizModal() {
+            clearInterval(runningTimer);
+            closeModal('modal-quiz');
+        }
+
+        /* --- 13. تسليم التاسكات العملية --- */
+        function openTaskModal(taskId) {
+            if (!checkStudentPermission('سجل دخولك بحساب طالب لفتح وتسليم التاسكات وكسب النقاط.')) return;
+            const task = tasksList.find(t => t.id === taskId);
+            if (!task) return;
+            activeTaskItem = task;
+
+            document.getElementById('tmodal-subject').textContent = `${task.subject} • +${task.xp} XP`;
+            document.getElementById('tmodal-title').textContent = task.title;
+            document.getElementById('tmodal-desc').textContent = task.desc;
+            document.getElementById('tmodal-answer').value = '';
+            document.getElementById('modal-task').classList.remove('hidden');
+        }
+
+        function submitStudentTask(e) {
+            e.preventDefault();
+            if (!activeTaskItem) return;
+            const done = currentUser.tasksDone || [];
+            if (!currentUser.taskSubmissions) currentUser.taskSubmissions = {};
+            const answer = document.getElementById('tmodal-answer').value.trim();
+            const isFirstSubmission = !done.includes(activeTaskItem.id);
+            currentUser.taskSubmissions[activeTaskItem.id] = {
+                answer,
+                submittedAt: new Date().toLocaleString('ar-EG')
+            };
+            if (isFirstSubmission) {
+                currentUser.tasksDone = [...done, activeTaskItem.id];
+                currentUser.xp = (currentUser.xp || 0) + (activeTaskItem.xp || 50);
+            }
+            syncStudentRecord();
+            renderAll();
+            notify(isFirstSubmission
+                ? `🎉 تم تسليم التاسك وحصلت على +${activeTaskItem.xp || 50} XP`
+                : '✅ تم تحديث إجابتك على التاسك بنجاح');
+            closeModal('modal-task');
+        }
+
+        /* --- 14. لوحة الشرف --- */
+        function renderLeaderboard() {
+            const sorted = [...studentsList].sort((a, b) => (b.xp || 0) - (a.xp || 0));
+            document.getElementById('leaderboard-rows').innerHTML = sorted.map((s, i) => {
+                const isMe = currentUser && currentUser.id === s.id;
+                const medal = i === 0 ? '🥇 1' : i === 1 ? '🥈 2' : i === 2 ? '🥉 3' : `#${i + 1}`;
+                const totalDone = ((s.studied || []).length) + ((s.tasksDone || []).length);
+                return `
+                    <tr style="${isMe ? 'background: rgba(0, 210, 255, 0.14); font-weight: 800;' : ''}">
+                        <td><span class="badge ${i < 3 ? 'badge-amber' : 'badge-blue'}">${medal}</span></td>
+                        <td>${s.name} ${isMe ? '<span class="badge badge-cyan">أنت</span>' : ''}</td>
+                        <td style="direction: ltr; font-family: monospace;">${s.id}</td>
+                        <td>${totalDone} منجز</td>
+                        <td style="color: var(--accent); font-weight: 900;">⚡ ${s.xp || 0} XP</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        /* --- 15. إدارة المشرف (رفع الملفات + AI + البلاغات) --- */
+        function renderAdminLists() {
+            document.getElementById('admin-students-count').textContent = studentsList.length;
+            document.getElementById('admin-files-count').textContent = filesList.length;
+            document.getElementById('admin-quizzes-count').textContent = quizzesList.length;
+            document.getElementById('admin-tasks-count').textContent = tasksList.length;
+
+            const submissions = [];
+            studentsList.forEach(student => {
+                Object.entries(student.taskSubmissions || {}).forEach(([taskId, submission]) => {
+                    const task = tasksList.find(t => t.id === taskId);
+                    submissions.push({ student, taskId, task, submission });
+                });
+            });
+            const submissionsBox = document.getElementById('admin-submissions-list');
+            submissionsBox.innerHTML = submissions.length ? submissions.slice().reverse().map(item => `
+                <div style="padding:11px;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;">
+                    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+                        <strong style="font-size:.84rem;">${item.student.name} • ${item.task ? item.task.title : 'تاسك محذوف'}</strong>
+                        <span class="badge badge-cyan">${item.task ? item.task.subject : '—'}</span>
+                    </div>
+                    <p style="font-size:.8rem;color:var(--text-muted);margin-top:6px;white-space:pre-wrap;">${(item.submission.answer || 'لم يكتب الطالب إجابة نصية').replace(/</g, '&lt;')}</p>
+                    <small style="color:var(--text-muted);">${item.submission.submittedAt || ''}</small>
+                </div>
+            `).join('') : '<p style="font-size:.8rem;color:var(--text-muted);">لا توجد تسليمات محفوظة حتى الآن.</p>';
+
+            // البلاغات
+            const repBox = document.getElementById('admin-reports-list');
+            repBox.innerHTML = reportsList.length
+                ? reportsList.map(r => `
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--bg-input); border-radius: 10px; border: 1px solid rgba(239, 68, 68, 0.4);">
+                        <div>
+                            <div style="font-size: 0.75rem; color: #f87171;">${r.subject} • بلاغ من: ${r.reporter} (${r.time})</div>
+                            <div style="font-size: 0.85rem; font-weight: 800;">${r.fileTitle}</div>
+                        </div>
+                        <button onclick="resolveReport('${r.id}')" class="btn btn-success btn-sm">✓ تم الإصلاح</button>
+                    </div>
+                `).join('')
+                : `<div style="font-size: 0.82rem; color: var(--text-muted);">لا توجد بلاغات عن روابط معطلة حالياً.</div>`;
+
+            // الملفات
+            document.getElementById('admin-files-list').innerHTML = filesList.map(f => `
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px; background: var(--bg-input); border-radius: 10px; border: 1px solid var(--border-color);">
+                    <div style="min-width: 0;">
+                        <div style="font-size: 0.72rem; color: var(--accent);">${f.subject} • ${f.type}</div>
+                        <div style="font-size: 0.84rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${f.title}</div>
+                    </div>
+                    <div style="display: flex; gap: 5px; flex-shrink: 0;">
+                        <button onclick="triggerAIForExistingFile('${f.id}')" class="btn btn-ai btn-sm" title="توليد كويز وتاسك AI">🤖 AI</button>
+                        <button onclick="deleteFile('${f.id}')" class="btn btn-danger btn-sm">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // الكويزات
+            document.getElementById('admin-quizzes-list').innerHTML = quizzesList.map(q => `
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--bg-input); border-radius: 10px; border: 1px solid var(--border-color);">
+                    <div>
+                        <div style="font-size: 0.72rem; color: #fbbf24;">${q.subject} • +${q.xp} XP</div>
+                        <div style="font-size: 0.84rem; font-weight: 700;">${q.title}</div>
+                    </div>
+                    <button onclick="deleteQuiz('${q.id}')" class="btn btn-danger btn-sm">حذف</button>
+                </div>
+            `).join('');
+        }
+
+        function openAddFileModal() {
+            document.getElementById('modal-add-file').classList.remove('hidden');
+        }
+
+        async function saveNewMaterial(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('save-file-submit-btn');
+            submitBtn.disabled = true;
+
+            const newFile = {
+                id: 'f-' + Date.now(),
+                title: document.getElementById('in-file-title').value.trim(),
+                subject: document.getElementById('in-file-subject').value,
+                type: document.getElementById('in-file-type').value,
+                url: document.getElementById('in-file-url').value.trim(),
+                notes: document.getElementById('in-file-notes').value.trim()
+            };
+
+            const selectedModeEl = document.querySelector('input[name="file-ai-mode"]:checked');
+            const aiMode = selectedModeEl ? selectedModeEl.value : 'quiz_and_task';
+
+            filesList.unshift(newFile);
+            saveData();
+            closeModal('modal-add-file');
+            e.target.reset();
+            submitBtn.disabled = false;
+            renderAll();
+
+            if (aiMode === 'quiz_and_task') {
+                notify('✅ تم رفع الملف، وجاري توليد الكويز والتاسك بالـ AI...');
+                await generateAIQuizAndTaskForLecture(newFile, { includeQuiz: true, includeTask: true });
+            } else if (aiMode === 'quiz_only') {
+                notify('✅ تم رفع الملف، وجاري إعداد كويز فقط بدون تاسك...');
+                await generateAIQuizAndTaskForLecture(newFile, { includeQuiz: true, includeTask: false });
+            } else {
+                notify('📄 تم رفع الملف فقط بدون تاسك أو كويز عام بنجاح!');
+            }
+        }
+
+        function deleteFile(id) {
+            filesList = filesList.filter(f => f.id !== id);
+            saveData();
+            renderAll();
+            notify('🗑️ تم حذف الملف');
+        }
+
+        function openAddQuizModal() {
+            document.getElementById('modal-add-quiz').classList.remove('hidden');
+        }
+
+        function saveNewQuiz(e) {
+            e.preventDefault();
+            const newQuiz = {
+                id: 'q-' + Date.now(),
+                title: document.getElementById('in-quiz-title').value.trim(),
+                subject: document.getElementById('in-quiz-subject').value,
+                xp: Number(document.getElementById('in-quiz-xp').value) || 100,
+                time: 60,
+                questions: [{
+                    q: document.getElementById('in-q-text').value.trim(),
+                    options: [
+                        document.getElementById('in-q-c').value.trim(),
+                        document.getElementById('in-q-w1').value.trim(),
+                        document.getElementById('in-q-w2').value.trim(),
+                        document.getElementById('in-q-w3').value.trim()
+                    ],
+                    correct: 0,
+                    exp: document.getElementById('in-q-exp').value.trim() || 'الإجابة الصحيحة وفقاً لقوانين المحاضرة.'
+                }]
+            };
+            quizzesList.unshift(newQuiz);
+            saveData();
+            closeModal('modal-add-quiz');
+            e.target.reset();
+            renderAll();
+            notify('⚡ تم نشر الكويز للطلاب!');
+        }
+
+        function deleteQuiz(id) {
+            quizzesList = quizzesList.filter(q => q.id !== id);
+            saveData();
+            renderAll();
+            notify('🗑️ تم حذف الكويز');
+        }
+
+        function deleteTask(id) {
+            tasksList = tasksList.filter(t => t.id !== id);
+            saveData();
+            renderAll();
+            notify('🗑️ تم حذف التاسك');
+        }
+
+        function exportPlatformBackup() {
+            if (!currentUser || currentUser.role !== 'admin') return;
+            const backup = {
+                version: 1,
+                exportedAt: new Date().toISOString(),
+                filesList, quizzesList, tasksList, studentsList, reportsList, platformConfig
+            };
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `UniDrive-Hub-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+            notify('✅ تم تنزيل النسخة الاحتياطية');
+        }
+
+        function importPlatformBackup(event) {
+            if (!currentUser || currentUser.role !== 'admin') return;
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const data = JSON.parse(reader.result);
+                    if (!Array.isArray(data.filesList) || !Array.isArray(data.quizzesList) ||
+                        !Array.isArray(data.tasksList) || !Array.isArray(data.studentsList)) {
+                        throw new Error('invalid backup');
+                    }
+                    if (!confirm('استعادة النسخة ستستبدل بيانات الموقع الحالية على هذا المتصفح. هل تريد المتابعة؟')) return;
+                    filesList = data.filesList;
+                    quizzesList = data.quizzesList;
+                    tasksList = data.tasksList;
+                    studentsList = data.studentsList;
+                    reportsList = Array.isArray(data.reportsList) ? data.reportsList : [];
+                    if (data.platformConfig && typeof data.platformConfig === 'object') {
+                        platformConfig = { ...platformConfig, ...data.platformConfig };
+                    }
+                    saveData();
+                    renderAll();
+                    notify('✅ تمت استعادة النسخة الاحتياطية');
+                } catch (err) {
+                    notify('❌ ملف النسخة الاحتياطية غير صالح');
+                } finally {
+                    event.target.value = '';
+                }
+            };
+            reader.onerror = () => notify('❌ تعذر قراءة ملف النسخة الاحتياطية');
+            reader.readAsText(file);
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+    <!-- كود ربط Firebase بالموقع -->
+    <script type="module" src="firebase.js"></script>
+
+</body>
+
+</html>
