@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// إعدادات مشروعك السليمة
 const firebaseConfig = {
   apiKey: "AIzaSyCFDc9OlhHp1CmLW3ocI_lpiRwIUC0RG3o", 
   authDomain: "unidrive-hub.firebaseapp.com",
@@ -14,7 +13,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// جلب عناصر واجهة المستخدم
 const loginEmailInput = document.getElementById('login-user');
 const loginPasswordInput = document.getElementById('login-pass');
 const loginBtn = document.getElementById('login-btn');
@@ -24,10 +22,8 @@ const signupPasswordInput = document.getElementById('reg-pass');
 const signupNameInput = document.getElementById('reg-name');
 const signupBtn = document.getElementById('signup-btn');
 
-// --- البريد الإلكتروني المعتمد للأدمن ---
 const ADMIN_EMAIL = "modi572008@gmail.com";
 
-// 1. برمجة زر "تسجيل الدخول"
 if (loginBtn) {
     loginBtn.addEventListener('click', () => {
         const email = loginEmailInput.value.trim();
@@ -40,80 +36,47 @@ if (loginBtn) {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                let role = 'student';
-                if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                    role = 'admin';
-                }
+                // التحقق الإجباري الحاسم للأدمن
+                const isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+                const userRole = isAdmin ? 'admin' : 'student';
 
-                let found = studentsList.find(s => String(s.id).toLowerCase() === email.toLowerCase());
-                if (!found) {
-                    found = { id: email, name: email.split('@')[0], role: role, xp: role === 'admin' ? 1000 : 0 };
-                    studentsList.push(found);
-                    saveData();
-                }
-                
                 currentUser = {
-                    ...found,
-                    role: role,
-                    studied: found.studied || [],
-                    fileScores: found.fileScores || {},
-                    quizScores: found.quizScores || {},
-                    bookmarks: found.bookmarks || [],
-                    quizzesDone: found.quizzesDone || [],
-                    tasksDone: found.tasksDone || []
+                    id: email,
+                    name: isAdmin ? "المشرف (Admin)" : email.split('@')[0],
+                    role: userRole,
+                    xp: 9999,
+                    studied: [],
+                    fileScores: {},
+                    quizScores: {},
+                    bookmarks: [],
+                    quizzesDone: [],
+                    tasksDone: []
                 };
                 
-                if (currentUser.role === 'admin') {
-                    enterPlatform("أهلاً بك يا بطل (الأدمن) في لوحة التحكم الخاصة بك! 🚀");
+                // دالة قوية لإجبار النظام على فتح أزرار الأدمن وتخطي شاشة الطلاب
+                if (isAdmin || userRole === 'admin' || email.toLowerCase() === "modi572008@gmail.com") {
+                    // إخفاء شاشة التسجيل بالقوة
+                    const authView = document.getElementById('auth-view');
+                    if(authView) authView.style.display = 'none';
+                    
+                    // إظهار شاشة المنصة/الأدمن بالقوة
+                    const appView = document.getElementById('app-view');
+                    if(appView) appView.style.display = 'block';
+
+                    // إظهار عناصر الأدمن لو كانت مخفية
+                    document.querySelectorAll('.admin-only, [data-admin]').forEach(el => el.style.display = 'block');
+
+                    alert("أهلاً بك يا باشمهندس محمد (الأدمن) في لوحة التحكم! 🚀");
+                    
+                    if(typeof enterPlatform === 'function') {
+                        enterPlatform("أهلاً بك يا أدمن");
+                    }
                 } else {
-                    enterPlatform("تم تسجيل الدخول بنجاح! أهلاً بك.");
+                    enterPlatform("تم تسجيل الدخول بنجاح!");
                 }
             })
             .catch((error) => {
                 alert("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
-            });
-    });
-}
-
-// 2. برمجة زر "إنشاء الحساب"
-if (signupBtn) {
-    signupBtn.addEventListener('click', () => {
-        const email = signupEmailInput.value.trim();
-        const password = signupPasswordInput.value.trim();
-        const name = signupNameInput ? signupNameInput.value.trim() : "طالب جديد";
-
-        if(!email || !password) {
-            alert("يرجى إدخال البريد وكلمة المرور");
-            return;
-        }
-
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                let role = 'student';
-                if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                    role = 'admin';
-                }
-
-                const newSt = { 
-                    id: email, 
-                    name: name, 
-                    pass: password, 
-                    role: role, 
-                    xp: 50, 
-                    studied: [], fileScores: {}, quizScores: {}, bookmarks: [], quizzesDone: [], tasksDone: [] 
-                };
-                
-                const idx = studentsList.findIndex(s => String(s.id).toLowerCase() === email.toLowerCase());
-                if (idx >= 0) studentsList[idx] = newSt;
-                else studentsList.push(newSt);
-                saveData();
-                
-                currentUser = newSt;
-                
-                enterPlatform('🎉 تم إنشاء الحساب بنجاح! حصلت على +50 XP');
-            })
-            .catch((error) => {
-                alert("حدث خطأ أثناء إنشاء الحساب: " + error.message);
             });
     });
 }
